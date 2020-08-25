@@ -1,0 +1,20 @@
+#+TITLE: Course Intro
+#+AUTHOR: Gabriel Petrini
+#+DATE: August 25th, 2020
+#+PROPERTY: header-args:julia  :session *julia*
+#+PROPERTY: header-args   :results output :exports both :tangle petrini_lecture_01.jl
+
+* Introduction
+
+#+BEGIN_SRC julia
+println("Vem pro Emacs Luan")
+#+END_SRC
+
+#+RESULTS:
+: Vem pro Emacs Luan
+
+* Introduction to Julia
+
+* Computational Tools
+
+* Next lecture
