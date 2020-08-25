@@ -1,0 +1,127 @@
+% Created 2020-08-25 ter 12:02
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[theorems, skins]{tcolorbox}
+\usepackage[style=abnt,noslsn,extrayear,uniquename=init,giveninits,justify,sccite,
+scbib,repeattitles,doi=false,isbn=false,url=false,maxcitenames=2,
+natbib=true,backend=biber]{biblatex}
+\usepackage{url}
+\usepackage[linktocpage,pdfstartview=FitH,colorlinks,
+linkcolor=blue,anchorcolor=blue,
+citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
+\usepackage{attachfile}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{minted}
+\author{Gabriel Petrini}
+\date{August 25th, 2020}
+\title{Course Intro}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Introduction}
+\label{sec:orge0f02e7}
+
+\subsection{What this class is about}
+\label{sec:org695ceb8}
+
+This class is a smattering of advanced econometrics topics.
+
+\begin{itemize}
+\item Understanding the usefulness of structural modeling
+\item Learning the computational tools for estimating structural models
+\item Advanced topics in treatment effects and measurement error models
+\end{itemize}
+
+
+\subsection{Applicability of topics}
+\label{sec:orgf24f91e}
+
+The techniques we will cover are used in a wide variety of fields of applied microeconomics:
+
+\begin{itemize}
+\item Labor
+\item Education
+\item IO
+\item Public
+\item Development
+\item Health
+\item Urban/Regional
+\item Environmental
+\item Others
+\end{itemize}
+
+
+\subsection{What we will cover in the class}
+\label{sec:orgec16462}
+
+\begin{enumerate}
+\item Basic computing and things you need to think about
+\item Coding, version control, reproducibility, workflow
+\item Estimating and simulating structural models
+\item Subjective expectations models
+\item Measurement error correction
+\item Treatment effects
+\item Machine learning
+\end{enumerate}
+
+
+\subsection{Grading}
+\label{sec:org7791d9b}
+
+\begin{itemize}
+\item Problem sets:
+\begin{itemize}
+\item You must use Julia and write .jl scripts, no Jupyter
+\item You can work in groups of up to 3, but you must turn in your own code
+\end{itemize}
+\item Class participation:
+\item Midterm exam:
+\item Paper presentation:
+\begin{itemize}
+\item You must consult with me at least 1 week prior to your scheduled presentation date to ensure the paper is appropriate for a presentation
+\end{itemize}
+\item Paper referee report:
+\begin{itemize}
+\item The paper shouldn't be published, or if it has been published, you should use the earliest pre-print version
+\end{itemize}
+\item Research proposal:
+\end{itemize}
+
+\section{More about Julia}
+\label{sec:org9afcdd4}
+
+\subsection{Basic operations}
+\label{sec:orgfc6c4da}
+
+\begin{itemize}
+\item \textbf{Array indexing:} use \texttt{[ ]}
+\item \textbf{Show output:} use \texttt{println()}
+\item \textbf{Commenting:} use \texttt{\#} for single line, \texttt{\#= ... =\#} for multi-line
+\item \textbf{Element-wise operators:} must put a \texttt{.} in front, e.g. \texttt{x .+ y} if \texttt{x} and \texttt{y} are arrays
+\item \textbf{Load installed package:} \texttt{using Random}
+\item \textbf{Execute script:} \texttt{include("myfile.jl")}
+\end{itemize}
+
+\section{Next lecture}
+\label{sec:org70b29e4}
+\end{document}

@@ -61,5 +61,9 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 
 - *Array indexing:* use ~[ ]~
 - *Show output:* use ~println()~
+- *Commenting:* use ~#~ for single line, ~#= ... =#~ for multi-line
+- *Element-wise operators:* must put a ~.~ in front, e.g. ~x .+ y~ if ~x~ and ~y~ are arrays
+- *Load installed package:* ~using Random~
+- *Execute script:* ~include("myfile.jl")~
 
 * Next lecture
