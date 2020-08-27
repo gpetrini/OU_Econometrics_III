@@ -1,4 +1,4 @@
-% Created 2020-08-25 ter 12:02
+% Created 2020-08-25 ter 19:22
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -39,10 +39,10 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 
 \section{Introduction}
-\label{sec:orge0f02e7}
+\label{sec:org28e84b3}
 
 \subsection{What this class is about}
-\label{sec:org695ceb8}
+\label{sec:orgb8f8899}
 
 This class is a smattering of advanced econometrics topics.
 
@@ -54,7 +54,7 @@ This class is a smattering of advanced econometrics topics.
 
 
 \subsection{Applicability of topics}
-\label{sec:orgf24f91e}
+\label{sec:orgd4c1165}
 
 The techniques we will cover are used in a wide variety of fields of applied microeconomics:
 
@@ -72,7 +72,7 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 
 
 \subsection{What we will cover in the class}
-\label{sec:orgec16462}
+\label{sec:org0c9d36a}
 
 \begin{enumerate}
 \item Basic computing and things you need to think about
@@ -86,7 +86,7 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 
 
 \subsection{Grading}
-\label{sec:org7791d9b}
+\label{sec:org61bbb46}
 
 \begin{itemize}
 \item Problem sets:
@@ -108,10 +108,10 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 \end{itemize}
 
 \section{More about Julia}
-\label{sec:org9afcdd4}
+\label{sec:orga66d072}
 
 \subsection{Basic operations}
-\label{sec:orgfc6c4da}
+\label{sec:org25a760f}
 
 \begin{itemize}
 \item \textbf{Array indexing:} use \texttt{[ ]}
@@ -122,6 +122,21 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 \item \textbf{Execute script:} \texttt{include("myfile.jl")}
 \end{itemize}
 
+\subsection{Creating and executing a Julia script}
+\label{sec:orga1c6d0a}
+
+In Julia, even scripts should have functions wrapped around them. Then the script is executed at the REPL by typing \texttt{include("myscript.jl")}. Wrapping code in a function allows the JIT compiler to optimize the code.
+
+\subsection{Comprehensions}
+\label{sec:org77bd312}
+
+Allows the user in 1 line of code to create an object that could be a complex formula. Exemple:
+
+$$
+\sum^T_{t=1} \beta^tY_t
+$$
+\texttt{PV = sum([β\textasciicircum{}t*Y[t] for t=1:T])}
+
 \section{Next lecture}
-\label{sec:org70b29e4}
+\label{sec:orgb1158e5}
 \end{document}

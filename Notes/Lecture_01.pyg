@@ -1,1 +1,7 @@
-println("Vem pro Emacs Logo")
+T = 50
+β = 20
+Y = [10]
+PV = sum(
+    [β^t*Y[t] for t=1:T]
+)
+println(PV)
