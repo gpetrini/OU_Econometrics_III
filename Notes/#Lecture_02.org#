@@ -1,14 +1,7 @@
 #+TITLE: Introduction to Structural Models
 #+AUTHOR: Gabriel Petrini
 #+DATE: August 25th, 2020
-#+LATEX_HEADER: \usepackage{minted}    
-#+PROPERTY: header-args:julia  :session *julia*
-#+PROPERTY: header-args:julia :exports both :results output :tangle petrini_lecture_01.jl :async t
 #+LATEX_HEADER: \bibliography{References.bib}
-
-#+BEGIN_SRC sh
-cp ../References/References.bib References.bib
-#+END_SRC
 
 
 * Introduction
