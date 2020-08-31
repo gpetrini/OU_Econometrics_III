@@ -1,4 +1,4 @@
-% Created 2020-08-25 ter 19:22
+% Created 2020-08-27 qui 18:39
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -22,6 +22,7 @@
 scbib,repeattitles,doi=false,isbn=false,url=false,maxcitenames=2,
 natbib=true,backend=biber]{biblatex}
 \usepackage{url}
+\usepackage[cache=false]{minted}
 \usepackage[linktocpage,pdfstartview=FitH,colorlinks,
 linkcolor=blue,anchorcolor=blue,
 citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
@@ -39,10 +40,10 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 
 \section{Introduction}
-\label{sec:org28e84b3}
+\label{sec:orgba3dd3e}
 
 \subsection{What this class is about}
-\label{sec:orgb8f8899}
+\label{sec:org21a546e}
 
 This class is a smattering of advanced econometrics topics.
 
@@ -54,7 +55,7 @@ This class is a smattering of advanced econometrics topics.
 
 
 \subsection{Applicability of topics}
-\label{sec:orgd4c1165}
+\label{sec:org8025d63}
 
 The techniques we will cover are used in a wide variety of fields of applied microeconomics:
 
@@ -72,7 +73,7 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 
 
 \subsection{What we will cover in the class}
-\label{sec:org0c9d36a}
+\label{sec:org9c56b23}
 
 \begin{enumerate}
 \item Basic computing and things you need to think about
@@ -86,7 +87,7 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 
 
 \subsection{Grading}
-\label{sec:org61bbb46}
+\label{sec:orgbb359db}
 
 \begin{itemize}
 \item Problem sets:
@@ -108,10 +109,10 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 \end{itemize}
 
 \section{More about Julia}
-\label{sec:orga66d072}
+\label{sec:org8e5514f}
 
 \subsection{Basic operations}
-\label{sec:org25a760f}
+\label{sec:org53fb074}
 
 \begin{itemize}
 \item \textbf{Array indexing:} use \texttt{[ ]}
@@ -123,12 +124,12 @@ The techniques we will cover are used in a wide variety of fields of applied mic
 \end{itemize}
 
 \subsection{Creating and executing a Julia script}
-\label{sec:orga1c6d0a}
+\label{sec:orgf3ab864}
 
 In Julia, even scripts should have functions wrapped around them. Then the script is executed at the REPL by typing \texttt{include("myscript.jl")}. Wrapping code in a function allows the JIT compiler to optimize the code.
 
 \subsection{Comprehensions}
-\label{sec:org77bd312}
+\label{sec:org0501d40}
 
 Allows the user in 1 line of code to create an object that could be a complex formula. Exemple:
 
@@ -136,7 +137,4 @@ $$
 \sum^T_{t=1} \beta^tY_t
 $$
 \texttt{PV = sum([β\textasciicircum{}t*Y[t] for t=1:T])}
-
-\section{Next lecture}
-\label{sec:orgb1158e5}
 \end{document}

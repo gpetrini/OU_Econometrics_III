@@ -1,4 +1,4 @@
-% Created 2020-08-27 qui 12:21
+% Created 2020-08-27 qui 15:55
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -28,6 +28,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 \usepackage{attachfile}
 \usepackage{setspace}
 \usepackage{tikz}
+\usepackage{minted}
 \bibliography{References.bib}
 \author{Gabriel Petrini}
 \date{August 25th, 2020}
@@ -40,7 +41,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 
 \section{Introduction}
-\label{sec:org98d90c7}
+\label{sec:org7a0c69c}
 
 
 \textbf{Pre-class reading:} 
@@ -50,7 +51,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 \end{itemize}
 
 \subsection{Reading Quiz}
-\label{sec:orge1c1c5e}
+\label{sec:org91f3d7b}
 
 \begin{enumerate}
 \item Explain what identification means, according to Arthur Lewbel
@@ -75,12 +76,12 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 
 \subsection{Causality: the goal of econometrics}
-\label{sec:org27ee8d1}
+\label{sec:orgafdb3fa}
 
 In any econometric endeavor, the goal is to uncover causal relationships. Correlations, otherwise, is contaminated by omitted variable bias.
 
 \subsubsection{Causality requires a counterfactual}
-\label{sec:org87eeace}
+\label{sec:org0dc1be3}
 
 Causality is defined in terms of a \textbf{counterfactual}
 
@@ -91,7 +92,7 @@ Causality is defined in terms of a \textbf{counterfactual}
 \textbf{``Causal effect'':} difference between reality and the most plausible counterfactual
 
 \subsection{Structural empirical work}
-\label{sec:org5281d55}
+\label{sec:org430ac96}
 
 \textbf{Structure:} A structure is a data generating process, i.e. a set of functional or probabilistic relationships between observable and latent variables which implies a joint distribution of the observables
 
@@ -111,7 +112,7 @@ Estimate parameters of a \uline{data generating process} (DGP) which are assumed
 
 
 \subsubsection{Brief history of the term ``reduced form''}
-\label{sec:orgd3e182d}
+\label{sec:org9cfa240}
 
 \begin{itemize}
 \item The term \uline{reduced form} refers to solving a structural model
@@ -134,7 +135,7 @@ Estimate parameters of a \uline{data generating process} (DGP) which are assumed
 \end{itemize}
 
 \section{Randomize Control-Trial (RCT) as structural estimation}
-\label{sec:orge4a766d}
+\label{sec:org3317d19}
 
 \begin{itemize}
 \item All causal inference is structural in nature (as correctly defined)
@@ -147,7 +148,7 @@ Estimate parameters of a \uline{data generating process} (DGP) which are assumed
 \end{itemize}
 
 \subsection{Not every DGP can be evaluated by RCT}
-\label{sec:org922c5c3}
+\label{sec:orgc055deb}
 
 \begin{itemize}
 \item Without randomization, we have to rely on observational data
@@ -163,7 +164,7 @@ $$
 $$
 
 \section{Key parameters of any economic model}
-\label{sec:org6a7e751}
+\label{sec:orgf0c891f}
 
 \begin{itemize}
 \item As mentioned above, we assume that DGP parameters are \uline{policy-invariant}
@@ -180,10 +181,10 @@ $$
 \end{itemize}
 
 \section{Reading-to-Children Example}
-\label{sec:org15db5f1}
+\label{sec:orgd927c46}
 
 \subsection{Reduced-form example}
-\label{sec:org916145d}
+\label{sec:org848d374}
 
 \begin{itemize}
 \item A \uline{reduced-form} (as misused today) approach would look like the following:
@@ -198,7 +199,7 @@ $$
 
 
 \subsection{Structural approach}
-\label{sec:org35ee967}
+\label{sec:orgdfe4df1}
 
 \begin{itemize}
 \item A \uline{structural} (as misused today) approach would look like the following:
@@ -213,7 +214,7 @@ $$
 \end{itemize}
 
 \subsection{Hybrid approach}
-\label{sec:orgca147c5}
+\label{sec:orgffe791e}
 
 \begin{itemize}
 \item A \uline{hybrid} approach would do the following:
@@ -230,7 +231,7 @@ $$
 \end{itemize}
 
 \section{What is identification? \cite{lewbel2019zoo}}
-\label{sec:orgfc1ae97}
+\label{sec:org81841e2}
 
 \begin{itemize}
 \item \textbf{Identification:} model parameters being \uline{uniquely determined} from the \uline{observable population} that generates the data
@@ -243,7 +244,7 @@ $$
 \end{itemize}
 
 \subsection{More formal definition}
-\label{sec:org1dc3ca0}
+\label{sec:org52206bc}
 
 
 Let \(\theta\) denote a set of unknown parameters that we would like to learn about, and ideally, estimate
@@ -256,7 +257,7 @@ Let \(\theta\) denote a set of unknown parameters that we would like to learn ab
 \end{itemize}
 
 \subsection{Why is identification important?}
-\label{sec:org817ce46}
+\label{sec:org0129c47}
 
 \begin{itemize}
 \item The study of identification logically precedes estimation, inference, and testing
@@ -269,7 +270,7 @@ Let \(\theta\) denote a set of unknown parameters that we would like to learn ab
 \end{itemize}
 
 \subsection{Reduced-form vs. Structural Identification}
-\label{sec:orgb09b454}
+\label{sec:org51e27c1}
 
 \begin{itemize}
 \item In \uline{reduced-form} econometrics (a.k.a. causal modeling):
@@ -288,7 +289,7 @@ Let \(\theta\) denote a set of unknown parameters that we would like to learn ab
 \end{itemize}
 
 \subsection{The Credibility Revolution}
-\label{sec:orgb3b70cd}
+\label{sec:org02144d4}
 
 \begin{itemize}
 \item What makes an identification strategy credible?
@@ -300,7 +301,7 @@ Let \(\theta\) denote a set of unknown parameters that we would like to learn ab
 \end{itemize}
 
 \subsubsection{Examples of Identification Strategies}
-\label{sec:org24b6eab}
+\label{sec:orgf0e9dc6}
 
 \begin{itemize}
 \item Randomized experiments, field experiments, lab experiments
@@ -313,7 +314,7 @@ Let \(\theta\) denote a set of unknown parameters that we would like to learn ab
 \end{itemize}
 
 \subsubsection{Credible Structural Models}
-\label{sec:orgd9f9af4}
+\label{sec:org21c1088}
 
 What makes a structural model credible?
 
@@ -331,7 +332,7 @@ What makes a structural model credible?
 \end{itemize}
 
 \subsubsection{Structural Methods}
-\label{sec:org47311d9}
+\label{sec:orgdbfd343}
 
 Unlike reduced-form methods, there is not a set ``toolkit'' of techniques
 
@@ -347,7 +348,7 @@ Unlike reduced-form methods, there is not a set ``toolkit'' of techniques
 
 
 \section{Internal and External Validity}
-\label{sec:org24fed69}
+\label{sec:org96075f9}
 
 \begin{itemize}
 \item \textbf{Internal validity} refers to ``how causal'' an estimated parameter is
@@ -365,7 +366,7 @@ Unlike reduced-form methods, there is not a set ``toolkit'' of techniques
 
 
 \subsection{Example: Internal vs. External Validity}
-\label{sec:org6087d04}
+\label{sec:org7c60958}
 
 Suppose we want to measure earth's gravitational force, \(g\)
 

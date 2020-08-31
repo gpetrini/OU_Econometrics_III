@@ -78,5 +78,4 @@ $$
 \sum^T_{t=1} \beta^tY_t
 $$
 ~PV = sum([β^t*Y[t] for t=1:T])~
-
-* Next lecture
+ 

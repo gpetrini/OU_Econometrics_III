@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Reading Quiz}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Causality: the goal of econometrics}{section.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Causality requires a counterfactual}{subsection.1.2}% 4
+\BOOKMARK [2][-]{subsection.1.3}{Structural empirical work}{section.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.3.1}{Brief history of the term ``reduced form''}{subsection.1.3}% 6
+\BOOKMARK [1][-]{section.2}{Randomize Control-Trial \(RCT\) as structural estimation}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Not every DGP can be evaluated by RCT}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Key parameters of any economic model}{}% 9
+\BOOKMARK [1][-]{section.4}{Reading-to-Children Example}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Reduced-form example}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Structural approach}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Hybrid approach}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{What is identification? lewbel2019zoo}{}% 14
+\BOOKMARK [2][-]{subsection.5.1}{More formal definition}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.2}{Why is identification important?}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.3}{Reduced-form vs. Structural Identification}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.4}{The Credibility Revolution}{section.5}% 18
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Examples of Identification Strategies}{subsection.5.4}% 19
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Credible Structural Models}{subsection.5.4}% 20
+\BOOKMARK [3][-]{subsubsection.5.4.3}{Structural Methods}{subsection.5.4}% 21
+\BOOKMARK [1][-]{section.6}{Internal and External Validity}{}% 22
+\BOOKMARK [2][-]{subsection.6.1}{Example: Internal vs. External Validity}{section.6}% 23
