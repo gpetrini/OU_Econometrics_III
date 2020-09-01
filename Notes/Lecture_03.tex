@@ -1,0 +1,699 @@
+% Created 2020-09-01 ter 12:15
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[theorems, skins]{tcolorbox}
+\usepackage[style=abnt,noslsn,extrayear,uniquename=init,giveninits,justify,sccite,
+scbib,repeattitles,doi=false,isbn=false,url=false,maxcitenames=2,
+natbib=true,backend=biber]{biblatex}
+\usepackage{url}
+\usepackage[cache=false]{minted}
+\usepackage[linktocpage,pdfstartview=FitH,colorlinks,
+linkcolor=blue,anchorcolor=blue,
+citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
+\usepackage{attachfile}
+\usepackage{setspace}
+\usepackage{tikz}
+\bibliography{References.bib}
+\usepackage{minted}
+\author{Gabriel Petrini}
+\date{September 1st, 2020}
+\title{Structural modeling process}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Pre-class reading: Practical Issues in Structural Estimation (\href{https://www.youtube.com/watch?v=0hazaPBAYWE}{Keane YouTube talk, 2015})}
+\label{sec:org7aa7cf1}
+
+\subsection{Structural Model Development}
+\label{sec:org2a0fe8e}
+
+Structural estimation has several key stages
+
+\subsubsection{Theoretical model development}
+\label{sec:orgf34758d}
+
+Assume you want to build a structural model to address an \textbf{economic or policy question of interest}. A good starting point is to ask what elements your model must have to \uline{credibly} address the question:
+
+\begin{itemize}
+\item The model cannot be so simple (or stylized) that it essentially imposes \uline{answers \emph{a priori}}
+\begin{itemize}
+\item You must include all the mechanisms that generates same relevant pattern in order to not rig the results to answer the question of interest
+\end{itemize}
+\item It must be plausible to assume parameters of the model are \textbf{invariant} to policy experiments that you plan to do
+\begin{itemize}
+\item You should plan what experiments will be employed with this model in the very beginning
+\end{itemize}
+\end{itemize}
+
+\texttt{Example: ``How important is the moral hazard effect of health insurance?''}
+
+\subsubsection{Practical Specification issues}
+\label{sec:orga0f2b2d}
+
+There is an inherent conflict between:
+
+\begin{enumerate}
+\item Model that is rich enough to credibly address the question of interest
+\begin{itemize}
+\item As we make model richier, we tend to get more \textbf{state variables}
+\end{itemize}
+\item A model that is feasible to solve and estimate
+\begin{itemize}
+\item Too many state variables makes solution infeaseble
+\end{itemize}
+\end{enumerate}
+
+
+The art of Structural Estimation is largely about how to develop ``rich'' models that are still feasible to solve and estimate. There are strategies to reduce the number of state variables (\emph{e.g.} fertility and labor supply, brand inventories - assuming stationary tastes) so it is not necessarily to keep track of all states altogether.
+
+\subsubsection{Solving the model \& Understanding how the model works}
+\label{sec:org784f19f}
+
+
+Let's assume you have settled on a model that you think is fit for purpose. These two steps should be done in tandem. You should be writing programs to \uline{at the same time}:
+
+\begin{itemize}
+\item solve the model
+\item simulate the model
+\item calculate descriptive statistics
+\end{itemize}
+
+Always begin by programming a simple special case of the model - where theory makes a clear prediction of how it should behave. If your simulations do not lines up with basic theory, you have done something wrong.
+
+\begin{itemize}
+\item You should add mechanisms of features to the model \uline{one at time}.
+\begin{itemize}
+\item Always rig the program so if a parameter (let say, \(\theta\)) is set to zero, the new mechanism is shut down. Then, make sure you get the \textbf{Exact} same simulation results as before if you set this parameter to zero
+\end{itemize}
+\item Once you have introduced a new mechanism, manipulate the new parameters related to that mechanism to see what they do
+\begin{itemize}
+\item Make sure the simulation results make intuitive sense
+\begin{itemize}
+\item If they do not make sense, you probably have a bug
+\item \uline{Sometimes}, basic intuition turns out to be wrong and you have learned some economics
+\end{itemize}
+\end{itemize}
+\item Continuing introducing new mechanisms step-by-step until you have your full model
+\item By the end of this process, you will have a good understanding of how each feature of the model (and the parameters) affects behaviour
+\begin{itemize}
+\item Spending a lot of time learning what each parameter does to behaviour also gives you a good intuitive understanding of how the model is identified and could warn about identification issues
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Estimation}
+\label{sec:org22dcf2f}
+
+Nonlinear estimation is difficult
+
+\begin{itemize}
+\item You cannot just start the parameter vector at some random place and expect it to coverage
+\begin{itemize}
+\item \textbf{Suggestion:} Finds values that fits the intercepts
+\end{itemize}
+\item You need to \textbf{calibrate} the model to achieve a half way decent fit before iterating
+\begin{itemize}
+\item This also teaches you a lot of how the model works
+\item You should expect that this calibration process will take a long time and lots of patience
+\end{itemize}
+\item If you find it impossible to get a decent calibration \uline{by hand}, it means:
+\begin{itemize}
+\item there is some important mechanism you have omitted from the model
+\item you do not really understand the model
+\item you are not trying hard enough
+\end{itemize}
+\item \textbf{Strategy:} Presents the simplest model version. Discuss why it does not fit the data and what is needed to achieve it.
+\item Now that you are ready to estimate you need to write the code for the parameter search algorithm
+\begin{itemize}
+\item \textbf{Recommendation:} BHHH and Simplex (and help the search algorithm by hand)
+\item Only build up gradually to the full model as you are sure everything is working properly
+\end{itemize}
+\item Estimation is not a mechanical process
+\begin{itemize}
+\item As the parameter iterate, you should look
+\begin{itemize}
+\item Simulation of key statistics vs. actual data
+\item Values of parameters where there are some reasonable prior
+\end{itemize}
+\item Two types of things often go wrong
+\begin{itemize}
+\item Some parameters go to strange values
+\item Key moments do not improve or even get worse
+\item These are often symptoms of bugs in the code of a flaw in the model (\emph{e.g.} identification problem)
+\end{itemize}
+\item Problems in estimation are very frustrating because it can be hard to pin down the source
+\begin{itemize}
+\item Bug in estimation code
+\item Bug in solving the model
+\item A flaw in the model
+\item OBS: You almost never find the bug by reading the code. Hints:
+\begin{itemize}
+\item Shut down parts of the model to figure out which part is causing the problem
+\item Print out lots of stuff and check if it makes sense
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Validation}
+\label{sec:orgcd3e264}
+
+Let's say the parameters of the model have converged to sensible looking values and the in sample fit looks OK
+
+\begin{itemize}
+\item A good opportunity for validation is when an experiment has been run, and you can estimate the model on the ``control data'' and see if you can forecast the ``treatment data''
+\item You should think about whether you can validate the model \textbf{before} you estimate it
+\begin{itemize}
+\item Most structural papers do not do much in the way of model validation. One reason is that data needed to do validation is often not easily available
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Policy Experiments}
+\label{sec:org08b15c2}
+
+One of the major reasons we do structural estimation is because we can use structural model to do policy experiments
+\begin{itemize}
+\item Or we may want to use the model to optimize the parameters of a policy to maximize some objective
+\item Experiments only allow us to see effects of policies that have already been implemented
+\item A common flaw of structural papers is they do lot of work to solve and estimate the model
+\begin{itemize}
+\item But when that is done, they do not report any interesting experiments
+\item You should have some interesting experiments in mind before you even start
+\end{itemize}
+\end{itemize}
+
+\subsection{Conclusion: Why do structural estimation}
+\label{sec:org2ce18c0}
+
+\begin{itemize}
+\item One of the reasons is because you are interested in a \uline{model itself}
+\item Models that we are confident in using for policy evaluation
+\end{itemize}
+
+\section{Structural modeling workflow}
+\label{sec:org3f8e21b}
+
+\subsection{An example model}
+\label{sec:org0c730b1}
+
+To help fix ideas, let's revisit a commonly used model in introductory econometrics:
+
+
+\begin{align}
+\log(w_{i}) =& \beta_0 + \beta_1 s_{i} + \beta_2 x_{i} + \beta_3 x^2_{i} + \varepsilon_{i}
+\label{eq:basicmincer}
+\end{align}
+
+where we have cross-sectional data and where
+\begin{itemize}
+\item \(i\) indexes individuals
+\item \(w_{i}\) is employment income
+\item \(s_{i}\) is years of schooling
+\item \(x_{i}\) is years of work experience (or, more commonly, \uline{potential} work experience)
+\item \(\varepsilon_{i}\) is anything else that determines income
+\end{itemize}
+
+We want to estimate \(\left(\beta_1,\beta_2,\beta_3\right)\), which are \textbf{returns to human capital investment}
+
+\subsubsection{Quick review}
+\label{sec:orgbb38586}
+
+\begin{itemize}
+\item It is nearly certain that \eqref{eq:basicmincer} suffers from omitted variable bias
+
+\begin{itemize}
+\item i.e. there are lots of factors in \(\varepsilon_{i}\) that are correlated with both \(s_i\) and \(w_i\)
+\end{itemize}
+
+\item Thus, our estimates of \(\left(\beta_1,\beta_2,\beta_3\right)\) will not be causal
+
+\item We could try to get causal estimates using a variety of identification strategies:
+
+\begin{itemize}
+\item find a valid instrument for \(s_i\) \cite{angristKrueger1991,card1995}
+\item exploit a discontinuity in \(s_i\) \cite{ost_al2018}
+\item randomize \(s_i\) \cite{attanasio_al2011}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{A structural view of Equation \eqref{eq:basicmincer}}
+\label{sec:org35fb45c}
+
+We know that \eqref{eq:basicmincer} will produced biased estimates, but \uline{why}? Some possibilities:
+
+\begin{itemize}
+\item \textbf{ability bias:} \(s_i\) and \(w_i\) are both positively correlated with unobservable cognitive ability
+\item \textbf{comparative advantage:} multidimensional unobservable ability \(\implies\) self-selection into schooling
+\item \textbf{credit constraints:} \(s_i\) is a costly investment; some people may not be able to borrow enough
+\item \textbf{preference heterogeneity:} (differing tastes for \(s_i\), differing discount rates)
+\end{itemize}
+
+\subsection{Theoretical Model Development}
+\label{sec:org2dc93f9}
+
+\begin{itemize}
+\item Since schooling has an up-front cost and long-term benefit, need a dynamic model
+\begin{itemize}
+\item \textbf{period 1:} decide how much schooling to get
+\item \textbf{period 2:} choose whether or not to work; if working, receive income by \eqref{eq:basicmincer}
+\item individuals choose schooling level to maximize lifetime utility
+\end{itemize}
+\item Preferences (denote utility in period \(t\) by \(u_t\), with \(s,x\) and \(w\) defined previously)
+\end{itemize}
+
+
+\begin{align}
+u_1\left(z,c,\eta_1\right) & = f\left(z,c,\eta_1\right) \nonumber \\
+u_2\left(w\left(s,x\right),k,\eta_2\right) & = g\left(w\left(s,x\right),k,\eta_2\right) \\
+\label{eq:utils}
+\end{align}
+
+where \(z\) is family background, \(c\) is schooling costs, \(k\) is number of kids in adult household and \(\eta_t\) are unobservable preferences [similar to \(\varepsilon\) in \eqref{eq:basicmincer}]
+
+
+With discount factor \(\delta \in \left[0,1\right]\), the discounted lifetime utility function is then
+
+
+\begin{align}
+V & = u_1\left(z,c,\eta_1\right) + \delta u_2\left(w\left(s,x\right),k,\eta_2\right)
+\label{eq:PDV}
+\end{align}
+
+\begin{itemize}
+\item Equations \eqref{eq:basicmincer}–\eqref{eq:PDV} define our model
+\item A number of important questions arise (But we'll ignore these for today)
+\begin{itemize}
+\item Where is cognitive ability? What exactly does \(c\) represent? Where are loans?
+\item Maybe people should care about \uline{consumption} in period 2, not income
+\item Does family background really only enter \(u_1\) and not \(\log\left(w\right)\)?
+\item Should \(x\) in \eqref{eq:basicmincer} be a function of \(s\)? (Lower \(s \implies\) longer working life)
+\item What are people's beliefs about future \(k\) when deciding \(s\)?
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Overview of the theoretical model}
+\label{sec:org3cb833f}
+
+\begin{center}
+\begin{tabular}{lllll}
+\hline
+\textbf{Exog} & \textbf{Endog} & \textbf{Outcome} & \textbf{Unobs} & \textbf{Parameters}\\
+\hline
+family background \((z)\) & schooling \((s)\) & labor income \((w)\) & income \((\varepsilon)\) & retn. human capital \((\beta)\)\\
+schooling costs \((c)\) & period-2 work dec. &  & preferences \((\eta_t)\) & discount factor \((\delta)\)\\
+children in household \((k)\) &  &  &  & other \(f(\cdot)\) and \(g(\cdot)\)\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\subsection{Practical Specification Issues}
+\label{sec:org7195d3c}
+
+Now that we have a model, we need to figure out how to take it to data
+
+\begin{itemize}
+\item This is where we apply knowledge about \uline{our data} and \uline{stats/econometrics}
+\item Key data questions:
+\begin{itemize}
+\item Can we observe the variables of the model in our data set?
+\item If so, are they reliably measured?
+\end{itemize}
+
+\item Key specification questions:
+\begin{itemize}
+\item How to model \(\eta_t\) and \(\varepsilon\)? (Need to make distributional assumptions)
+\item Functional forms of \(f(\cdot)\) and \(g(\cdot)\)
+\item Should \(s\) be continuous (years of schooling) or discrete (college/not)?
+\end{itemize}
+\end{itemize}
+
+What determines the specification is often:
+
+\begin{itemize}
+\item what is reliably measured in the data
+\item what is computationally feasible to estimate
+\end{itemize}
+
+Parameters of the model either need to be \textbf{estimated} or \textbf{calibrated}
+
+\begin{itemize}
+\item e.g. often we don't have reliable data to allow us to estimate \(\delta\); we must calibrate it
+\item Computational feasibility often governs how we specify the different functions
+
+\begin{itemize}
+\item e.g. \uline{linear-in-parameters} with \uline{additively separable} unobservables [like \eqref{eq:basicmincer}]
+\end{itemize}
+\end{itemize}
+
+\section{Example real data}
+\label{sec:orgf124b96}
+
+Here is some real data from the most recent round of the NLSY97
+
+\begin{verbatim}
+using CSV, DataFrames, Statistics
+df = CSV.read("Data/slides3data.csv"; missingstrings=["NA"])
+size(df)
+# outputs (6009, 12)
+describe(df)
+# outputs the below:
+12×8 DataFrame
+│ Row │ variable       │ mean     │ min  │ median  │ max     │ nunique │ nmissing │
+│     │ Symbol         │ Float64  │ Real │ Float64 │ Real    │ Nothing │ Union…   │
+├─────┼────────────────┼──────────┼──────┼─────────┼─────────┼─────────┼──────────┤
+│ 1   │ id             │ 4534.71  │ 4    │ 4544.0  │ 9022    │         │          │
+│ 2   │ female         │ 0.52671  │ 0    │ 1.0     │ 1       │         │          │
+│ 3   │ black          │ 0.269762 │ 0    │ 0.0     │ 1       │         │          │
+│ 4   │ latin          │ 0.210351 │ 0    │ 0.0     │ 1       │         │          │
+│ 5   │ white          │ 0.511067 │ 0    │ 1.0     │ 1       │         │          │
+│ 6   │ employed       │ 0.756532 │ 0    │ 1.0     │ 1       │         │          │
+│ 7   │ wage           │ 25.5309  │ 8.0  │ 20.0    │ 150.0   │         │ 933      │
+│ 8   │ collgrad       │ 0.350474 │ 0    │ 0.0     │ 1       │         │          │
+│ 9   │ age            │ 34.967   │ 33   │ 35.0    │ 37      │         │          │
+│ 10  │ parent_college │ 0.238975 │ 0    │ 0.0     │ 1       │         │          │
+│ 11  │ numkids        │ 1.32684  │ 0    │ 1.0     │ 9       │         │          │
+│ 12  │ efc            │ 4.2243   │ 0.0  │ 0.77763 │ 118.111 │         │          │
+\end{verbatim}
+
+\begin{itemize}
+\item We have demographics/background, wages, employment status, education, fertility
+\item N=6009, age \(\in \{33,\ldots,37\}\), and 35\% of respondents graduated college
+\end{itemize}
+
+\subsection{Setting up the specification}
+\label{sec:orgfab2057}
+
+It looks like we can estimate some form of our model
+
+\begin{itemize}
+\item We have family background, cost of college (this is the \texttt{efc} variable)
+\item We have employment status, wage and number of children
+\item It looks like we'll have to have \(s\) be binary (\texttt{collgrad} variable)
+\item Also need to assume \(x = age - 18\) if non-grad, \(x = age - 22\) if grad  \cite{mincer1974}
+\end{itemize}
+
+Then we just need to add some functional form assumptions, and we'll be ready
+
+\(\varepsilon \sim\) Normal, \(\eta_t \sim\) Logistic
+
+$$u_{i1} = \alpha_0 + \alpha_1 \text{ parent\_college} + \alpha_2 \text{ efc} + \eta_1$$
+
+$$u_{i2} = \gamma_0 + \gamma_1 \mathbb{E} \log w_{i} + \gamma_2 \text{ numkids} + \eta_2$$
+
+\subsection{Parameters of the empirical model}
+\label{sec:orgda7366d}
+
+We can now detail the parameters of the empirical model
+
+\begin{itemize}
+\item \textbf{wage parameters} \((\beta,\sigma_{\varepsilon})\)
+\begin{itemize}
+\item The latter is the std. dev. of income shocks
+\end{itemize}
+\item \textbf{schooling parameters} \((\alpha)\)
+\item \textbf{employment parameters} \((\gamma,\delta)\)
+\end{itemize}
+
+Then write down a statistical objective function as a fn. of data and parameters
+
+\begin{itemize}
+\item e.g. maximize the likelihood, or minimize the sum of the squared residuals
+\end{itemize}
+
+\subsection{Solving and Understanding How the Model Works}
+\label{sec:orgd053b2c}
+
+Solving the model:
+
+\begin{itemize}
+\item solve the dynamic utility max problem for given parameter values
+\item (we aren't estimating parameter values yet)
+\end{itemize}
+
+
+Understanding the model:
+
+\begin{itemize}
+\item simulate data from the model
+\item make sure the simulated data is consistent with the model's implications
+\item look at descriptive statistics from the simulated data
+\end{itemize}
+
+Start with as simple of a model as possible; make sure things are working
+
+\begin{itemize}
+\item When introducing more complexities, do ``numerical comparative statics''
+\item Make sure the parameters move in the correct directions
+\begin{itemize}
+\item e.g. \(\uparrow \beta_1 \implies \uparrow\) schooling (ceteris paribus)
+\end{itemize}
+\end{itemize}
+
+\subsection{Julia Example}
+\label{sec:org251da65}
+
+\begin{verbatim}
+N = size(df,1)
+beta = [1.65,.4,.06,-.0002]
+sigma = .4;
+df.exper = df.age .- ( 18*(1 .- df.collgrad) .+ 22*df.collgrad )
+df.lwsim = beta[1] .+ beta[2]*df.collgrad .+ beta[3]*df.exper .+ beta[4]*df.exper.^2 .+ sigma*randn(N)
+df.lw    = log.(df.wage)
+\end{verbatim}
+
+
+We can then compare how \texttt{df.lwsim} compares with \texttt{df.lw} in the data
+
+\begin{verbatim}
+describe(df;cols=[:lw,:lwsim])
+# returns
+| Row | variable | mean    | min     | median  | max     | nunique | nmissing | eltype                  |
+|     | Symbol   | Float64 | Float64 | Float64 | Float64 | Nothing | Union    | Type                    |
+---------------------------------------------------------------------------------------------------------
+| 1   | lw       | 3.06219 | 2.07944 | 2.99573 | 5.01064 |         | 933      | Union{Missing, Float64} |
+| 2   | lwsim    | 2.67169 | 1.12192 | 2.67668 | 3.98557 |         |          | Float64                 |
+\end{verbatim}
+
+\subsection{Estimation}
+\label{sec:org70e8789}
+
+
+Most structural models require \textbf{nonlinear estimation}
+
+\begin{itemize}
+\item In nonlinear optimization, starting values are crucial   
+\begin{itemize}
+\item Initializing at random starting values is likely to give poor results
+\begin{itemize}
+\item Keane recommends calibrating the model by hand
+\item e.g. match the intercept of each equation to the \(\overline{Y}\)'s in the data
+\end{itemize}
+\item I recommend estimating an intercepts-only model (or with very few \(X\)'s)
+\begin{itemize}
+\item But this advice is model-specific!
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Example using real data}
+\label{sec:orgcfbf2a3}
+
+In our simple model, we can get good starting values by estimating OLS and logits
+\begin{itemize}
+\item The wage equation can be estimated by OLS (on the subsample who are employed)
+\end{itemize}
+
+\begin{verbatim}
+using GLM
+\hat\beta= lm(@formula(lw ~ collgrad + exper + exper^2), df[df.employed.==1,:])
+# returns
+Coefficients:
+─────────────────────────────────────────────────────────────────────────────────
+               Estimate  Std. Error    t value  Pr(>|t|)    Lower 95%   Upper 95%
+─────────────────────────────────────────────────────────────────────────────────
+(Intercept)   2.94607    0.323145     9.11688     <1e-18   2.31255     3.57959
+collgrad      0.534326   0.0271395   19.6881      <1e-82   0.481119    0.587532
+exper        -0.0265561  0.0412115   -0.644386    0.5194  -0.107351    0.0542385
+exper ^ 2     0.0014304  0.00132307   1.08112     0.2797  -0.00116346  0.00402426
+─────────────────────────────────────────────────────────────────────────────────
+df.elwage = predict(\hat\beta, df) # generates expected log wage for all observations
+r2(\hat\beta)                               # reports R2
+sqrt(deviance(\hat\beta)/dof_residual(\hat\beta))  # reports root mean squared error
+\end{verbatim}
+
+
+The \(u_t\) equations can be estimated as simple logits (on the full sample)
+
+\begin{verbatim}
+\hat\alpha = glm(@formula(collgrad ~ parent_college + efc), df, Binomial(), LogitLink())
+# returns
+Coefficients:
+──────────────────────────────────────────────────────────────────────────────────
+                  Estimate  Std. Error   z value  Pr(>|z|)   Lower 95%   Upper 95%
+──────────────────────────────────────────────────────────────────────────────────
+(Intercept)     -1.20091    0.0364888   -32.9118    <1e-99  -1.27243    -1.1294
+parent_college   1.47866    0.068433     21.6074    <1e-99   1.34453     1.61278
+efc              0.0450253  0.00437704   10.2867    <1e-24   0.0364464   0.0536041
+──────────────────────────────────────────────────────────────────────────────────
+\hat\gamma= glm(@formula(employed ~ elwage + numkids), df, Binomial(), LogitLink())
+# returns
+Coefficients:
+──────────────────────────────────────────────────────────────────────────────
+               Estimate  Std. Error   z value  Pr(>|z|)  Lower 95%   Upper 95%
+──────────────────────────────────────────────────────────────────────────────
+(Intercept)  -4.25036     0.454826   -9.34503    <1e-20  -5.1418    -3.35892
+elwage        1.80081     0.149078   12.0796     <1e-32   1.50863    2.093
+numkids      -0.0797204   0.0218106  -3.65512    0.0003  -0.122468  -0.0369724
+──────────────────────────────────────────────────────────────────────────────
+\end{verbatim}
+
+\subsubsection{Do these results make sense?}
+\label{sec:org19c5cb0}
+
+\begin{itemize}
+\item It can be informative to try and interpret even these simple results
+
+\item wage equation:
+\begin{itemize}
+\item insignificant return to experience is surprising; otherwise makes sense
+\end{itemize}
+\item schooling choice:
+\begin{itemize}
+\item If \texttt{efc} captures college costs, it should have a negative sign
+\item This suggests omitted variable bias in this equation
+\end{itemize}
+\item employment choice:
+\begin{itemize}
+\item These results check out; may want to introduce nonlinearities in \texttt{numkids}
+\end{itemize}
+\end{itemize}
+
+\section{Validation}
+\label{sec:org69c06db}
+
+If you have a good model, it should be \textbf{valid} (i.e. predict well out of sample)
+
+\begin{itemize}
+\item Validation is not always possible, but it's good to do if you can
+
+\begin{itemize}
+\item e.g. if experimental data, estimate on control group, validate on treatment group
+\item e.g. see if model can replicate major policy change in data
+\end{itemize}
+
+\item More simply, you could throw out half your data, then try to predict other half
+\begin{itemize}
+\item This is typically not done if the full sample isn't huge
+\end{itemize}
+\end{itemize}
+
+\section{Policy Experiments}
+\label{sec:org8d5414e}
+
+\begin{itemize}
+\item This is the main reason to do structural estimation!
+\item Structural estimation \(\implies\) recovering the DGP of the model
+\item Once we know the DGP, we can simulate data from it and do policy experiments
+\begin{itemize}
+\item requires having policy-invariant parameters!
+\end{itemize}
+\item We can predict the effects of:
+\begin{itemize}
+\item proposed policies
+\item hypothetical policies
+\end{itemize}
+\item Contrast with RCTs, which only reveal effects of implemented policies
+\end{itemize}
+
+
+\subsection{Example using real data}
+\label{sec:org5e8fe50}
+
+\begin{itemize}
+\item We have two policy variables we could play with
+
+\begin{enumerate}
+\item \texttt{efc} (i.e. how much gov't subsidizes college tuition \& fees)
+\item return to schooling (this could change due to e.g. technological change)
+\end{enumerate}
+
+\item Here's how we would look at a counterfactual with lower cost:
+\end{itemize}
+\begin{verbatim}
+df_cfl     = deepcopy(df)
+df_cfl.efc = df.efc .- 1         # change value of efc to be $1,000 less
+df.basesch = predict(\hat\alpha, df)     # predicted collgrad probabilities under status quo
+df.cflsch  = predict(\hat\alpha, df_cfl) # predicted collgrad probabilities under counterfactual
+describe(df;cols=[:basesch,:cflsch])
+# returns
+│ Row │ variable │ mean     │ min      │ median   │ max      │ nunique │ nmissing │
+│     │ Symbol   │ Float64  │ Float64  │ Float64  │ Float64  │ Nothing │ Int64    │
+├─────┼──────────┼──────────┼──────────┼──────────┼──────────┼─────────┼──────────┤
+│ 1   │ basesch  │ 0.350474 │ 0.231313 │ 0.24387  │ 0.986715 │         │ 0        │
+│ 2   │ cflsch   │ 0.341794 │ 0.223404 │ 0.235663 │ 0.986111 │         │ 0        │
+\end{verbatim}
+
+Average likelihood of \texttt{collgrad} \uline{declines} from 35\% to 34.2\%
+
+\begin{itemize}
+\item This doesn't make sense because the \texttt{efc} coefficient didn't make sense
+\item We can't assess the counterfactual of increasing the return to schooling
+\item Because \texttt{elwage} doesn't directly enter the \texttt{collgrad} logit model
+\item This is because we aren't really estimating the dynamic model yet
+\end{itemize}
+
+
+
+\section{Conclusions}
+\label{sec:orgb28b7fe}
+
+\subsection{In summary: Why structural estimation?}
+\label{sec:org9000536}
+
+\begin{itemize}
+\item Want to examine effects of policies not yet implemented
+\item Learn more about economics by looking through the lens of a model
+\item Assess performance of theoretical models in explaining real-world data
+\item Can be used to build up long-run ``canonical'' models of behavior in many areas
+\item It can be really fun to do more complicated econometrics beyond simple regressions
+\item Observational data is much cheaper to collect than experimental data
+\end{itemize}
+
+
+\subsection{In summary: Why \underline{not} structural estimation?}
+\label{sec:org2fec7b4}
+
+\begin{itemize}
+\item It's really difficult to write down and estimate a tractable, realistic model!
+\item It requires additional effort beyond data preparation and running regressions
+\item Understanding identification of the model takes a lot of effort, too
+\item It can be really miserable to try and debug the code of a structural estimation
+\item Many structural models can take weeks to estimate one specification
+\begin{itemize}
+\item in addition to months spent coding/debugging beforehand
+\end{itemize}
+\item As you can see, even with a simple model things have already gotten complicated!
+\end{itemize}
+\end{document}
