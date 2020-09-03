@@ -1,0 +1,4 @@
+name = "econometric_gps"
+uuid = "c481e4fb-1b5d-4fd4-ad51-401d9520dc6a"
+authors = ["gpetrini <gpetrinidasilveira@gmail.com>"]
+version = "0.1.0"
