@@ -1,0 +1,439 @@
+% Created 2020-09-03 qui 14:17
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[theorems, skins]{tcolorbox}
+\usepackage[style=abnt,noslsn,extrayear,uniquename=init,giveninits,justify,sccite,
+scbib,repeattitles,doi=false,isbn=false,url=false,maxcitenames=2,
+natbib=true,backend=biber]{biblatex}
+\usepackage{url}
+\usepackage[cache=false]{minted}
+\usepackage[linktocpage,pdfstartview=FitH,colorlinks,
+linkcolor=blue,anchorcolor=blue,
+citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
+\usepackage{attachfile}
+\usepackage{setspace}
+\usepackage{tikz}
+\bibliography{./References.bib}
+\usepackage{minted}
+\author{Gabriel Petrini}
+\date{September 3st, 2020}
+\title{Static Discrete Choice Models}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Pre-class reading: \textcite[Ch 1, 3.1--3.3, 37--3.8]{train2009}}
+\label{sec:org236218c}
+
+\subsection{Reading Quiz}
+\label{sec:org423e952}
+
+\begin{enumerate}
+\item The most widely used discrete choice model is:
+\begin{itemize}
+\item GEV
+\item probit
+\item logit
+\item mixed logit
+\end{itemize}
+
+\item List the three properties that the choice set in a discrete choice model must satisfy
+
+\item Describe the most common interpretation that is given to the distribution of Ɛ (epsilon)
+
+\item Assess the validity of the following claim: utility-maximizing behavior can be expressed by a random utility model (RUM), but not all RUMs express utility-maximizing behavior
+
+\item Why do you think it is called a Random Utility Model?
+\end{enumerate}
+
+
+\section{What are discrete choice models?}
+\label{sec:org41a7d6c}
+
+
+Discrete choice models are one of the workhorses of structural economics and are deeply tied to economic theory:
+\begin{itemize}
+\item utility maximization
+\item revealed preference
+\item Used to model ``utility'' (broadly defined), for example:
+\begin{itemize}
+\item consumer product purchase decisions
+\item firm market entry decisions
+\item investment decisions
+\end{itemize}
+\end{itemize}
+
+\subsection{Properties of discrete choice models}
+\label{sec:org3f77fe8}
+
+\begin{enumerate}
+\item Agents choose from among a \textbf{finite} set of alternatives (called the \uline{choice set})
+
+\item Alternatives in choice set are \textbf{mutually exclusive}
+
+\item Choice set is \textbf{exhaustive}
+\end{enumerate}
+
+\subsection{Notation}
+\label{sec:org2e52f5e}
+
+Let \(d_i\) indicate the choice individual \(i\) makes where \(d_i\in\{1,\ldots, J\}\).
+
+\begin{itemize}
+\item Individuals choose \(d\) to maximize their utility, \(U\), which generally is written as:
+\end{itemize}
+\begin{align}
+U_{ij}&=u_{ij}+\epsilon_{ij}
+\end{align}
+where:
+\begin{itemize}
+\item \(u_{ij}\) relates observed factors to the utility individual \(i\) receives from choosing option \(j\)
+\item \(\epsilon_{ij}\) are unobserved to the econometrician but observed to the individual
+\end{itemize}
+
+\begin{align}
+d_{ij}&=1 \text{  if  } u_{ij}+\epsilon_{ij}>u_{ij'}+\epsilon_{ij'}\text{  for all  } j'\neq j
+\end{align}
+
+\subsection{Probabilities}
+\label{sec:org02f54c1}
+
+With the \(\epsilon\)'s unobserved, the probability of \(i\) making choice \(j\) is given by:
+\begin{align*}
+P_{ij}&=\Pr(u_{ij}+\epsilon_{ij}>u_{ij'}+\epsilon_{ij'}\,\,\forall\,\, j'\neq j)\\
+&=\Pr(\epsilon_{ij'}-\epsilon_{ij}<u_{ij}-u_{ij'}\,\,\forall\,\, j'\neq j)\\ % One side has $\varespilon$s and the other has $u$s
+&=\int_{\epsilon}I(\epsilon_{ij'}-\epsilon_{ij}<u_{ij}-u_{ij'}\,\,\forall\,\, j'\neq j)f(\epsilon)d\epsilon
+\end{align*}
+\begin{itemize}
+\item From the researcher perspective, the choice is probabilistic
+\item There are some assumptions about the distribution of \(f(\epsilon)\) that is needed to be made
+\end{itemize}
+
+
+Note that, regardless of what distributional assumptions are made on the \(\epsilon\)'s, the probability of choosing a particular option does not change when we:
+\begin{itemize}
+\item Add a constant to the utility of all options (i.e. \textbf{only differences in utility matter})
+\item Multiply by a positive number (need to \textbf{scale something}; e.g. the variance of the \(\epsilon\)'s)
+\end{itemize}
+
+\subsection{Variables}
+\label{sec:orgb493aeb}
+
+Suppose we have (observable by the econometrician):
+\begin{eqnarray*}
+u_{i1}=\alpha Male_i+\beta_1 X_i + \gamma Z_1\\
+u_{i2}=\alpha Male_i+\beta_2 X_i+\gamma Z_2\\
+\end{eqnarray*}
+
+Since only differences in utility matter:
+\begin{align*}
+u_{i1}-u_{i2}&=(\beta_1-\beta_2)X_i+\gamma (Z_1-Z_2)
+\end{align*}
+
+\begin{itemize}
+\item We can't tell whether men are happier than women, but can tell whether they more strongly prefer one option
+\begin{itemize}
+\item \(\alpha\text{Male}_i\) drops out (is not observable)
+\end{itemize}
+\item We can only obtain differenced coefficient estimates on \(X\)'s
+\item We can only obtain an estimate of a coefficient that is constant across choices if its corresponding variable varies by choice
+\end{itemize}
+
+
+\subsection{Number of Error Terms}
+\label{sec:org1a1cef2}
+
+Similar to the \(X\)'s, there are restrictions on the number of error terms
+
+\begin{itemize}
+\item This is because only differences in utility matter
+\end{itemize}
+
+Recall that he probability \(i\) will choose \(j\) is given by:
+\begin{align}
+P_{ij}&=\Pr(u_{ij}+\epsilon_{ij}>u_{ij'}+\epsilon_{ij'}\,\,\forall\,\, j'\neq j)\nonumber\\
+&=\Pr(\epsilon_{ij'}-\epsilon_{ij}<u_{ij}-u_{ij'}\,\,\forall\,\, j'\neq j)\label{eq:intprob}\\
+&=\int_{\epsilon}I(\epsilon_{ij'}-\epsilon_{ij}<u_{ij}-u_{ij'}\,\,\forall\,\, j'\neq j)f(\epsilon)d\epsilon\nonumber
+\end{align}
+
+where the integral is \(J\) dimensional
+
+Rewriting the last line of \eqref{eq:intprob} as a \(J-1\) dimensional integral over the differenced \(\epsilon\)'s:
+\begin{align}
+P_{ij}&=\int_{\tilde{\epsilon}}I(\tilde{\epsilon}_{ij'}<\tilde{u}_{ij'} \,\,\forall\,\, j'\neq j)g(\tilde{\epsilon})d\tilde{\epsilon}
+\end{align}
+
+\begin{itemize}
+\item This means one dimension of \(f(\epsilon)\) is not identified and must therefore be normalized
+\item Arises from only differences in utility mattering (\textbf{location normalization})
+\item The scale of utility also doesn't matter (\textbf{scale normalization})
+\begin{itemize}
+\item The scale normalization implies we must place restrictions on the variance of \(\epsilon\)'s
+\item This mean that is impossible to compare across estimations
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{More on the scale normalization}
+\label{sec:org9e32028}
+
+The need to normalize scale means that we can never estimate the variance of \(F\left(\tilde{\epsilon}\right)\)
+
+\begin{itemize}
+\item This contrasts with linear regression models, where we can easily estimate MSE
+\item The scale normalization means our \(\beta\)'s and \(\gamma\)'s are implicitly divided by an unknown variance term:
+\end{itemize}
+
+\begin{align*}
+u_{i1}-u_{i2}&=(\beta_1-\beta_2)X_i+\gamma (Z_1-Z_2)\\
+             &=\tilde{\beta}X_i + \gamma \tilde{Z} \\
+             &=\frac{\beta^*}{\sigma}X_i + \frac{\gamma^*}{\sigma}\tilde{Z}
+\end{align*}
+
+\begin{itemize}
+\item \(\tilde{\beta}\) is what we estimate, but we will never know \(\beta^*\) because utility is scale-invariant
+\end{itemize}
+
+
+\section{Logit Derivation}
+\label{sec:org25f2c42}
+
+\subsection{Where does the logit formula come from?}
+\label{sec:orgf6ad8bc}
+
+Consider a binary choice set \(\{1,2\}\). The Type 1 extreme value CDF for \(\epsilon_2\) is:
+\begin{align*}
+F(\epsilon_2)&=e^{-e^{(-\epsilon_2)}}
+\end{align*}
+
+To get the probability of choosing \(1\), substitute in for \(\epsilon_2\) with \(\epsilon_1+u_1-u_2\):
+\begin{align}
+\Pr(d_1=1|\epsilon_1)&=e^{-e^{-(\epsilon_1+u_1-u_2)}}
+\end{align}
+\begin{itemize}
+\item But \(\epsilon_1\) is unobserved so we need to integrate it out
+\end{itemize}
+
+Taking the integral over what is random \((\epsilon_1)\):
+
+\begin{align*}
+\Pr(d_1=1)&=\int_{-\infty}^{\infty}\overbrace{\left(e^{-e^{-(\epsilon_1+u_1-u_2)}}\right)}^{p.d.f}\overbrace{f(\epsilon_1)}^{\text{dist}}d\epsilon_1\\
+&=\int_{-\infty}^{\infty}\left(e^{-e^{-(\epsilon_1+u_1-u_2)}}\right)e^{-\epsilon_1}e^{-e^{-\epsilon_1}}d\epsilon_1\\
+&=\int_{-\infty}^{\infty}\exp\left(-e^{-\epsilon_1}-e^{-(\epsilon_1+u_1-u_2)}\right)e^{-\epsilon_1}d\epsilon_1\\
+&=\int_{-\infty}^{\infty}\exp\left(-e^{-\epsilon_1}\left[1+e^{u_2-u_1}\right]\right)e^{-\epsilon_1}d\epsilon_1
+\end{align*}
+
+\begin{itemize}
+\item We can simplify by U-substitution where \(t=\exp(-\epsilon_1)\) and \(dt=-\exp(-\epsilon_1)d\epsilon_1\)
+
+\item And adjusting the bounds of integration accordingly, \(\exp(-\infty)=0\) and \(\exp(\infty)=\infty\)
+\end{itemize}
+
+Substituting in then yields:
+
+\begin{align*}
+\Pr(d_1=1)&=\int_{\infty}^0\exp\left(-t\left[1+e^{(u_2-u_1)}\right]\right)(-dt)\\
+&=\int_0^{\infty}\exp\left(-t\left[1+e^{(u_2-u_1)}\right]\right)dt\\
+&=\left.\frac{\exp\left(-t\left[1+e^{(u_2-u_1)}\right]\right)}{-\left[1+e^{(u_2-u_1)}\right]}\right\vert^{\infty}_{0}\\
+&=0-\frac{1}{-\left[1+e^{(u_2-u_1)}\right]}\\
+&=\frac{\exp(u_1)}{\exp(u_1)+\exp(u_2)}
+\end{align*}
+
+
+Consider our model from before:
+\begin{align*}
+u_{i1}-u_{i2}=&(\beta_1-\beta_2)X_i+\gamma (Z_1-Z_2)
+\end{align*}
+
+\begin{itemize}
+\item We observe \(X_i\), \(Z_1\), \(Z_2\), and \(d_i\)
+
+\item Assuming \(\epsilon_1,\epsilon_2 \overset{iid}{\sim} T1EV\) gives the likelihood of choosing \(1\) and \(2\) respectively as:
+\end{itemize}
+\begin{align*}
+P_{i1}=&\frac{\exp(u_{i1}-u_{i2})}{1+\exp(u_{i1}-u_{i2})}\\
+P_{i2}=&\frac{1}{1+\exp(u_{i1}-u_{i2})}
+\end{align*}
+
+\begin{itemize}
+\item Note: if \(\epsilon_1,\epsilon_2 \overset{iid}{\sim} T1EV\) then  \(\tilde{\epsilon}_1 \sim Logistic\), where \(\tilde{\epsilon}_1 := \epsilon_1-\epsilon_2\)
+\end{itemize}
+
+\subsection{Likelihood function}
+\label{sec:org6f91823}
+
+We can view the event \(d_i = j\) as a weighted coin flip
+
+\begin{itemize}
+\item This gives us a random variable that follows the Bernoulli distribution
+\item Supposing our sample is of size \(N\), the likelihood function would then be
+\end{itemize}
+\begin{align}
+\mathcal{L}\left(X,Z;\beta,\gamma\right)=&\prod_{i=1}^N P_{i1}^{d_{i1}} P_{i2}^{d_{i2}} \nonumber\\
+=&\prod_{i=1}^N P_{i1}^{d_{i1}}\left[1-P_{i1}\right]^{(1-d_{i1})}\label{eq:logitlike}
+\end{align}
+
+where \(P_{i1}\) and \(P_{i2}\) are both functions of \(X,Z,\beta,\gamma\)
+
+For many reasons, it's better to maximize the log likelihood function
+
+\begin{itemize}
+\item Taking the log of \eqref{eq:logitlike} gives
+\end{itemize}
+
+\begin{align}
+\ell\left(X,Z;\beta,\gamma\right)=&\sum_{i=1}^N d_{i1}\log P_{i1} + (1-d_{i1}) \log \left(1-P_{i1}\right)\nonumber\\
+=&\sum_{i=1}^N \sum_{j=1}^2 d_{ij}\log P_{ij}\label{eq:logitloglike}\\
+=&\sum_{i=1}^N d_{i1}\left[\log \left(\exp (u_{i1}-u_{i2})\right)-\log\left(1 + \exp(u_{i1}-u_{i2})\right)\right] + \nonumber\\
+&(1-d_{i1}) \left[\log \left(1\right)-\log \left(1 + \exp (u_{i1}-u_{i2})\right)\right]\nonumber\\
+=&\sum_{i=1}^N d_{i1} \left[u_{i1}-u_{i2}\right]-\log\left(1+\exp(u_{i1}-u_{i2})\right)\nonumber
+\end{align}
+
+\subsection{Multinomial Logit Estimation}
+\label{sec:org9c08fa4}
+
+Adding more choices with i.i.d. Type I extreme value errors yields the \textbf{multinomial logit}
+
+\begin{itemize}
+\item Normalizing with respect to alternative \(J\) we have (for \(j\in\{1,\ldots,J-1\}\))
+\end{itemize}
+\begin{align}
+u_{ij}-u_{iJ}=&(\beta_j-\beta_J)X_i+\gamma (Z_j-Z_{J})
+\end{align}
+
+We observe \(X_i, Z_1, \ldots, Z_J\), and \(d_i\). The likelihood of choosing \(j\) and \(J\) respectively is:
+\begin{align}
+P_{ij}&=\frac{\exp(u_{ij}-u_{iJ})}{1+\sum_{j'=1}^{J-1}\exp(u_{ij'}-u_{iJ})},&P_{iJ}=\frac{1}{1+\sum_{j'=1}^{J-1}\exp(u_{ij'}-u_J)}
+\end{align}
+
+The log likelihood function we maximize is then:
+\begin{align}
+\ell(X,Z;\beta,\gamma)=&\sum_{i=1}^N\left[\sum_{j=1}^{J-1}(d_{ij}=1)(u_{ij}-u_{iJ})\right]-\ln\left(1+\sum_{j'=1}^{J-1}\exp(u_{ij'}-u_{iJ})\right)
+\end{align}
+
+\section{Independence of Irrelevant Alternatives (IIA)}
+\label{sec:orga522b04}
+
+One of the properties of the multinomial logit model is \textbf{IIA}
+
+
+\begin{itemize}
+\item \(P_{ij}/P_{ik}\) does not depend upon what other alternatives are available:
+\end{itemize}
+\begin{align*}
+\frac{P_{ij}}{P_{ik}}&=\frac{e^{u_{ij}}/\sum_{j'}e^{u_{ij'}}}{e^{u_{ik}}/\sum_{j'}e^{u_{ij'}}}\\
+&=\frac{e^{u_{ij}}}{e^{u_{ik}}}\\
+&=e^{u_{ij}-u_{ik}}
+\end{align*}
+
+
+\subsection{Advantage of IIA}
+\label{sec:orgad53a5a}
+
+IIA can simplify estimation. Instead of using as our likelihood
+\begin{align}
+P_{ij}=&\frac{\exp(u_{ij})}{\sum_{j'}^J\exp(u_{ij'})},
+\end{align}
+we can use the \uline{conditional likelihood} \(P_i(j|j\in K)\) where \(K<J\).  
+
+\begin{itemize}
+\item The log likelihood function is then  \cite{beggGray1984}:
+\end{itemize}
+\begin{align*}
+L(\beta,\gamma|d_i\in K)&=\sum_{i=1}^N\left[\sum_{j=1}^{K-1}(d_{ij}=1)(u_{ij}-u_{iK})\right]\\
+&-\ln\left(1+\sum_{j'=1}^K\exp(u_{ij'}-u_{iK})\right)
+\end{align*}
+
+\subsection{Disadvantage of IIA}
+\label{sec:org16e604e}
+
+Most famously illustrated by the ``red bus/blue bus problem''
+
+\begin{itemize}
+\item Consider a commuter with the choice set \(\{\text{ride a blue-colored bus}, \text{drive a car}\}\)
+\item Now add a red-colored bus to the choice set
+\item Assume that the only difference in utility between a red bus and a blue bus is in \(\epsilon\)
+\item This will \textbf{double} the probability of taking a bus
+\item Why? \(P(\text{blue bus})/P(\text{car})\) does not depend upon whether the red bus is available
+\end{itemize}
+
+\section{Expected Utility}
+\label{sec:orgd1ec7d3}
+
+It is possible to move from the estimates of the utility function to expected utility 
+
+\begin{itemize}
+\item (or at least differences in expected utility)
+
+\item Individual \(i\) is going to choose the best alternative
+
+\item Thus, expected utility from the best choice, \(V_i\), is given by:
+\end{itemize}
+\begin{align*}
+V_i&=E\max_{j}(u_{ij}+\epsilon_{ij})
+\end{align*}
+where the expectation is over all possible values of \(\epsilon _{ij}\)
+
+
+For the multinomial logit, this has a closed form:
+\begin{align}
+V_i&=\ln\left(\sum_{j=1}^J\exp{u_{ij}}\right)+C
+\end{align}
+where \(C\) is Euler's constant (a.k.a. Euler-Mascheroni constant)
+
+\begin{itemize}
+\item We will use this later when we discuss dynamic discrete choice models
+\end{itemize}
+
+\subsection{Alternative expression for expected utility}
+\label{sec:orgf493b53}
+
+Note that we can also express \(V_i\) as:
+\begin{align*}
+V_i&=\ln\left(\sum_{j=1}^J\frac{\exp(u_{iJ})\exp(u_{ij})}{\exp(u_{iJ})}\right)+C\\
+&=\ln\left(\sum_{j=1}^J\exp(u_{ij}-u_{iJ})\right)+u_{iJ}+C\\
+&=\ln\left(1+\sum_{j=1}^{J-1}\exp(u_{ij}-u_{iJ})\right)+u_{iJ}+C
+\end{align*}
+
+\begin{itemize}
+\item This representation will become useful later in the course
+\end{itemize}
+
+
+\subsection{From Expected Utility to Consumer Surplus}
+\label{sec:org1f9e77c}
+
+We may want to transform utility into dollars to get consumer surplus  
+
+\begin{itemize}
+\item We need something in the utility function (such as price) that is measured in dollars
+
+\item Suppose \(u_{ij}=\beta_jX_i+\gamma Z_j-\delta p_j\)
+
+\item The coefficient on price, \(\delta\) then gives the utils-to-dollars conversion:
+\end{itemize}
+\begin{align}
+E(CS_i)=&\frac{1}{\delta}\left[\ln\left(\sum_{j=1}^J\exp{u_{ij}}\right)+C\right]
+\end{align}
+\begin{itemize}
+\item We can calculate the change in consumer surplus after a policy change as \(E(CS_{i2})-E(CS_{i1})\) where the \(C\)'s cancel out
+\end{itemize}
+\end{document}
