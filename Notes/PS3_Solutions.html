@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-09-15 ter 14:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Problem Set 3 Solution</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Gabriel Petrini" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Problem Set 3 Solution</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org589bdd8">1. Question</a>
+<ul>
+<li><a href="#org7b7069f">1.1. Solution</a></li>
+</ul>
+</li>
+<li><a href="#orga33147c">2. Question</a>
+<ul>
+<li><a href="#org3172729">2.1. Solution</a></li>
+</ul>
+</li>
+<li><a href="#org94188ad">3. Question</a>
+<ul>
+<li><a href="#orgd3b605c">3.1. Solution</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org589bdd8" class="outline-2">
+<h2 id="org589bdd8"><span class="section-number-2">1</span> Question</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Estimate a multinomial logit (with alternative-specific covariates \(Z\)) on the following data set:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #4f97d7; font-weight: bold;">using</span> DataFrames
+<span style="color: #4f97d7; font-weight: bold;">using</span> CSV
+<span style="color: #4f97d7; font-weight: bold;">using</span> HTTP
+url = <span style="color: #2d9574;">"https://raw.githubusercontent.com/OU-PhD-Econometrics/fall-2020/</span>
+<span style="color: #2d9574;">master/ProblemSets/PS3-gev/nlsw88w.csv"</span>
+df = CSV.read(HTTP.get(url).body)
+X = [df.age df.white df.collgrad]
+Z = hcat(df.elnwage1, df.elnwage2, df.elnwage3, df.elnwage4, 
+         df.elnwage5, df.elnwage6, df.elnwage7, df.elnwage8)
+y = df.occupation
+</pre>
+</div>
+
+<p>
+the choice set represents possible occupations and is structured  as follows.
+</p>
+
+<ol class="org-ol">
+<li>Professional/Technical</li>
+<li>Managers/Administrators</li>
+<li>Sales</li>
+<li>Clerical/Unskilled</li>
+<li>Craftsmen</li>
+<li>Operatives</li>
+<li>Transport</li>
+<li>Other</li>
+</ol>
+
+<p>
+<b>Hints:</b>
+</p>
+
+<ul class="org-ul">
+<li>Index the parameter vector so that the coefficient on \(Z\) is the last element and the coefficients on \(X\) are the first set of elements.</li>
+<li>You will need to difference the \(Z\)'s in your likelihood function.</li>
+<li>Normalize \(\beta_J = 0\)</li>
+<li><p>
+The formula for the choice probabilities will thus be
+</p>
+\begin{align*}
+    P_{ij} &= \begin{cases} \frac{\exp\left(X_{i}\beta_j + \gamma(Z_{ij}-Z_{iJ})\right)}{1+\sum_{k=1}^{J-1}\exp\left(X_{i}\beta_k + \gamma(Z_{ik}-Z_{iJ})\right)} ,& j=1,\ldots,J-1\\
+     \frac{1}{1+\sum_{k=1}^{J-1}\exp\left(X_{i}\beta_k + \gamma(Z_{ik}-Z_{iJ})\right)} ,& j=J
+     \end{cases}
+\end{align*}</li>
+</ul>
+</div>
+
+<div id="outline-container-org7b7069f" class="outline-3">
+<h3 id="org7b7069f"><span class="section-number-3">1.1</span> Solution</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #4f97d7; font-weight: bold;">using</span> Random
+<span style="color: #4f97d7; font-weight: bold;">using</span> LinearAlgebra
+<span style="color: #4f97d7; font-weight: bold;">using</span> Statistics
+<span style="color: #4f97d7; font-weight: bold;">using</span> Optim
+<span style="color: #4f97d7; font-weight: bold;">using</span> DataFrames
+<span style="color: #4f97d7; font-weight: bold;">using</span> CSV
+<span style="color: #4f97d7; font-weight: bold;">using</span> HTTP
+<span style="color: #4f97d7; font-weight: bold;">using</span> GLM
+<span style="color: #4f97d7; font-weight: bold;">using</span> FreqTables
+<span style="color: #4f97d7; font-weight: bold;">using</span> ForwardDiff <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">for bonus at the very end</span>
+
+
+<span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">mlogit_with_Z</span>(theta, X, Z, y)
+        
+        alpha = theta[1:<span style="color: #4f97d7; font-weight: bold;">end</span>-1]
+        gamma = theta[<span style="color: #4f97d7; font-weight: bold;">end</span>] <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Indexing Z variables at the end</span>
+        K = size(X,2) <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">N Variables</span>
+        J = length(unique(y))
+        N = length(y)
+        bigY = zeros(N,J) <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Same as PS2.jl ...</span>
+        <span style="color: #4f97d7; font-weight: bold;">for</span> j<span style="color: #4f97d7; font-weight: bold;">=</span>1:J
+            bigY[:,j] = y.==j
+        <span style="color: #4f97d7; font-weight: bold;">end</span>
+        bigAlpha = [reshape(alpha,K,J-1) zeros(K)]
+        
+        T = promote_type(eltype(X),eltype(theta))
+        num   = zeros(T,N,J)
+        dem   = zeros(T,N)
+        <span style="color: #4f97d7; font-weight: bold;">for</span> j<span style="color: #4f97d7; font-weight: bold;">=</span>1:J
+            num[:,j] = exp.(X*bigAlpha[:,j] .+ (Z[:,j] .- Z[:,J])*gamma)
+            dem .+= num[:,j]
+        <span style="color: #4f97d7; font-weight: bold;">end</span>
+        
+        P = num./repeat(dem,1,J)
+        
+        loglike = -sum( bigY.*log.(P) )
+        
+        <span style="color: #4f97d7; font-weight: bold;">return</span> loglike
+    <span style="color: #4f97d7; font-weight: bold;">end</span>
+
+startvals = [2*rand(7*size(X,2)).-1; .1] <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">7 == J - 1</span>
+td = TwiceDifferentiable(theta -&gt; mlogit_with_Z(theta, X, Z, y), startvals; autodiff = <span style="color: #a45bad;">:forward</span>)
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">run the optimizer</span>
+theta_hat_optim_ad = optimize(td, startvals, LBFGS(), Optim.Options(g_tol = 1e-5, iterations=100_000, show_trace=<span style="color: #a45bad;">true</span>, show_every=50))
+theta_hat_mle_ad = theta_hat_optim_ad.minimizer
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">evaluate the Hessian at the estimates</span>
+H  = Optim.hessian!(td, theta_hat_mle_ad)
+theta_hat_mle_ad_se = sqrt.(diag(inv(H)))
+println([theta_hat_mle_ad theta_hat_mle_ad_se]) <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">these standard errors match Stata</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga33147c" class="outline-2">
+<h2 id="orga33147c"><span class="section-number-2">2</span> Question</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Interpret the estimated coefficient \(\hat{\gamma}\).
+</p>
+</div>
+
+<div id="outline-container-org3172729" class="outline-3">
+<h3 id="org3172729"><span class="section-number-3">2.1</span> Solution</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The coefficient gamma represents the change in utility with a 1-unit change in log wages. More properly, &gamma;/100 is the change in utility with a 1% increase in expected wage.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94188ad" class="outline-2">
+<h2 id="org94188ad"><span class="section-number-2">3</span> Question</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Estimate a nested logit with the following nesting structure:
+</p>
+<ul class="org-ul">
+<li>White collar occupations (indexed by \(WC\))
+<ol class="org-ol">
+<li>Professional/Technical</li>
+<li>Managers/Administrators</li>
+<li>Sales</li>
+</ol></li>
+<li>Blue collar occupations (indexed by \(BC\))
+<ol class="org-ol">
+<li>Clerical/Unskilled</li>
+<li>Craftsmen</li>
+<li>Operatives</li>
+<li>Transport</li>
+</ol></li>
+<li>Other occupations (indexed by \(\text{Other}\))
+<ol class="org-ol">
+<li>Other</li>
+</ol></li>
+</ul>
+
+<p>
+Specify the parameters such that there are only nest-level (rather than alternative-level) coefficients. That is, estimate a model with the following parameters:
+</p>
+<ul class="org-ul">
+<li>\(\beta_{WC}\)</li>
+<li>\(\beta_{BC}\)</li>
+<li>\(\lambda_{WC}\)</li>
+<li>\(\lambda_{BC}\)</li>
+<li>\(\gamma\)</li>
+<li>\(\beta_{\text{Other}}\) is normalized to 0</li>
+<li><p>
+The formula for the choice probabilities will thus be
+</p>
+\begin{align*}
+    P_{ij} &= \begin{cases} \frac{\exp\left(\frac{X_{i}\beta_{WC}+\gamma(Z_{ij}-Z_{iJ})}{\lambda_{WC}}\right)\left[\sum_{\ell\in WC}\exp\left(\frac{X_{i}\beta_{WC}+\gamma(Z_{i\ell}-Z_{iJ})}{\lambda_{WC}}\right)\right]^{\lambda_{WC}-1}}{1+\left[\sum_{k\in WC}\exp\left(\frac{X_{i}\beta_{WC}+\gamma(Z_{ik}-Z_{iJ})}{\lambda_{WC}}\right)\right]^{\lambda_{WC}}+\left[\sum_{m\in BC}\exp\left(\frac{X_{i}\beta_{BC}+\gamma(Z_{im}-Z_{iJ})}{\lambda_{BC}}\right)\right]^{\lambda_{BC}}} ,& j\in WC\\
+    \frac{\exp\left(\frac{X_{i}\beta_{BC}+\gamma(Z_{ij}-Z_{iJ})}{\lambda_{BC}}\right)\left[\sum_{\ell\in BC}\exp\left(\frac{X_{i}\beta_{BC}+\gamma(Z_{i\ell}-Z_{iJ})}{\lambda_{BC}}\right)\right]^{\lambda_{BC}-1}}{1+\left[\sum_{k\in WC}\exp\left(\frac{X_{i}\beta_{WC}+\gamma(Z_{ik}-Z_{iJ})}{\lambda_{WC}}\right)\right]^{\lambda_{WC}}+\left[\sum_{m\in BC}\exp\left(\frac{X_{i}\beta_{BC}+\gamma(Z_{im}-Z_{iJ})}{\lambda_{BC}}\right)\right]^{\lambda_{BC}}} ,& j\in BC\\
+     \frac{1}{1+\left[\sum_{k\in WC}\exp\left(\frac{X_{i}\beta_{WC}+\gamma(Z_{ik}-Z_{iJ})}{\lambda_{WC}}\right)\right]^{\lambda_{WC}}+\left[\sum_{m\in BC}\exp\left(\frac{X_{i}\beta_{BC}+\gamma(Z_{im}-Z_{iJ})}{\lambda_{BC}}\right)\right]^{\lambda_{BC}}} ,& j=J
+     \end{cases}
+\end{align*}</li>
+</ul>
+</div>
+
+<div id="outline-container-orgd3b605c" class="outline-3">
+<h3 id="orgd3b605c"><span class="section-number-3">3.1</span> Solution</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #4f97d7; font-weight: bold;">function</span> <span style="color: #bc6ec5; font-weight: bold;">nested_logit_with_Z</span>(theta, X, Z, y, nesting_structure)
+        
+        alpha = theta[1:<span style="color: #4f97d7; font-weight: bold;">end</span>-3]
+        lambda = theta[<span style="color: #4f97d7; font-weight: bold;">end</span>-2:<span style="color: #4f97d7; font-weight: bold;">end</span>-1]
+        gamma = theta[<span style="color: #4f97d7; font-weight: bold;">end</span>]
+        K = size(X,2)
+        J = length(unique(y))
+        N = length(y)
+        bigY = zeros(N,J)
+        <span style="color: #4f97d7; font-weight: bold;">for</span> j<span style="color: #4f97d7; font-weight: bold;">=</span>1:J
+            bigY[:,j] = y.==j
+        <span style="color: #4f97d7; font-weight: bold;">end</span>
+        bigAlpha = [repeat(alpha[1:K],1,length(nesting_structure[1])) repeat(alpha[K+1:2K],1,length(nesting_structure[2])) zeros(K)]
+        
+        T = promote_type(eltype(X),eltype(theta))
+        num   = zeros(T,N,J)
+        lidx  = zeros(T,N,J)
+        dem   = zeros(T,N)
+        <span style="color: #4f97d7; font-weight: bold;">for</span> j<span style="color: #4f97d7; font-weight: bold;">=</span>1:J
+            <span style="color: #4f97d7; font-weight: bold;">if</span> j in nesting_structure[1]
+                lidx[:,j] = exp.( (X*bigAlpha[:,j] .+ (Z[:,j] .- Z[:,J])*gamma)./lambda[1] )
+            <span style="color: #4f97d7; font-weight: bold;">elseif</span> j in nesting_structure[2]
+                lidx[:,j] = exp.( (X*bigAlpha[:,j] .+ (Z[:,j] .- Z[:,J])*gamma)./lambda[2] )
+            <span style="color: #4f97d7; font-weight: bold;">else</span>
+                lidx[:,j] = exp.(zeros(N))
+            <span style="color: #4f97d7; font-weight: bold;">end</span>
+        <span style="color: #4f97d7; font-weight: bold;">end</span>
+        <span style="color: #4f97d7; font-weight: bold;">for</span> j<span style="color: #4f97d7; font-weight: bold;">=</span>1:J
+            <span style="color: #4f97d7; font-weight: bold;">if</span> j in nesting_structure[1]
+                num[:,j] = lidx[:,j].*sum(lidx[:,nesting_structure[1][:]];dims=2).^(lambda[1]-1)
+            <span style="color: #4f97d7; font-weight: bold;">elseif</span> j in nesting_structure[2]
+                num[:,j] = lidx[:,j].*sum(lidx[:,nesting_structure[2][:]];dims=2).^(lambda[2]-1)
+            <span style="color: #4f97d7; font-weight: bold;">else</span>
+                num[:,j] = lidx[:,j]
+            <span style="color: #4f97d7; font-weight: bold;">end</span>
+            dem .+= num[:,j]
+        <span style="color: #4f97d7; font-weight: bold;">end</span>
+        
+        P = num./repeat(dem,1,J)
+        
+        loglike = -sum( bigY.*log.(P) )
+        
+        <span style="color: #4f97d7; font-weight: bold;">return</span> loglike
+    <span style="color: #4f97d7; font-weight: bold;">end</span>
+nesting_structure = [[1 2 3], [4 5 6 7]] <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">This is a list with the mentioned nested structure</span>
+
+startvals = [2*rand(2*size(X,2)).-1; 
+                1; 1; .1 <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Unclear</span>
+                ]    
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Same as before</span>
+td = TwiceDifferentiable(theta -&gt; nested_logit_with_Z(theta, X, Z, y, nesting_structure), startvals; autodiff = <span style="color: #a45bad;">:forward</span>)
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">run the optimizer</span>
+nlogit_theta_hat_optim_ad = optimize(td, startvals, LBFGS(), Optim.Options(g_tol = 1e-5, iterations=100_000, show_trace=<span style="color: #a45bad;">true</span>, show_every=50))
+nlogit_theta_hat_mle_ad = nlogit_theta_hat_optim_ad.minimizer
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">evaluate the Hessian at the estimates</span>
+H  = Optim.hessian!(td, nlogit_theta_hat_mle_ad)
+nlogit_theta_hat_mle_ad_se = sqrt.(diag(inv(H)))
+println([nlogit_theta_hat_mle_ad nlogit_theta_hat_mle_ad_se]) <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">these standard errors match Stata</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: September 15th, 2020</p>
+<p class="author">Author: Gabriel Petrini</p>
+<p class="date">Created: 2020-09-15 ter 14:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
