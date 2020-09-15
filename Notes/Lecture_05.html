@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-09-11 sex 11:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GEV</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Gabriel Petrini" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">GEV</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbff02f1">1. Pre-class reading: Train (2009, Ch 4.1&#x2013;4.2)</a>
+<ul>
+<li><a href="#orgb053e4e">1.1. Reading Quiz</a></li>
+</ul>
+</li>
+<li><a href="#orga60cb7c">2. Review</a>
+<ul>
+<li><a href="#orgc8e0491">2.1. Red bus / blue bus choice set</a></li>
+<li><a href="#org5fd6438">2.2. Nesting the choice set</a></li>
+<li><a href="#org5d10e6d">2.3. Other cases where nesting is useful</a></li>
+</ul>
+</li>
+<li><a href="#org2f96c9a">3. Nested Logit</a></li>
+<li><a href="#orge41b985">4. Nested Logit Estimation</a></li>
+<li><a href="#org473f75b">5. The Nested Logit as a Dynamic Discrete Choice Model</a>
+<ul>
+<li><a href="#orgd70dc61">5.1. Proposition 1 cite:mcfadden1978</a></li>
+</ul>
+</li>
+<li><a href="#org73b0138">6. Logit from GEV</a>
+<ul>
+<li><a href="#org684836c">6.1. Overlapping nests (Bresnahan et al., 1997)</a></li>
+</ul>
+</li>
+<li><a href="#org86c7385">References</a></li>
+</ul>
+</div>
+</div>
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #4f97d7; font-weight: bold;">require</span> '<span style="color: #a45bad;">org-attach-screenshot</span>)
+</pre>
+</div>
+
+<div id="outline-container-orgbff02f1" class="outline-2">
+<h2 id="orgbff02f1"><span class="section-number-2">1</span> Pre-class reading: <a href="http://eml.berkeley.edu/books/choice2nd/Ch04_p76-96.pdf">Train (2009, Ch 4.1&#x2013;4.2)</a></h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgb053e4e" class="outline-3">
+<h3 id="orgb053e4e"><span class="section-number-3">1.1</span> Reading Quiz</h3>
+<div class="outline-text-3" id="text-1-1">
+<ol class="org-ol">
+<li>Explain why mixed logit is such a popular model, according to Train. What are its strong points vis-à-vis the IIA problem?</li>
+<li>What are the computational drawbacks to mixed logit?</li>
+<li>What are two names for a mixed logit model that has a discrete mixing distribution?</li>
+<li>Explain why the EM algorithm is a potentially powerful tool for estimating discrete choice models.</li>
+<li>How does the EM algorithm work? Why does it work?</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga60cb7c" class="outline-2">
+<h2 id="orga60cb7c"><span class="section-number-2">2</span> Review</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc8e0491" class="outline-3">
+<h3 id="orgc8e0491"><span class="section-number-3">2.1</span> Red bus / blue bus choice set</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>As we discussed last time, adding another bus results in odd substitution patterns</li>
+<li>This is because of the IIA property of multinomial logit models</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="unnested.png" alt="unnested.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5fd6438" class="outline-3">
+<h3 id="org5fd6438"><span class="section-number-3">2.2</span> Nesting the choice set</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+One way to get around IIA is to <b>nest</b> the choice set
+</p>
+<ul class="org-ul">
+<li>Nesting explicitly introduces correlation across alternatives within the same nest</li>
+</ul>
+
+
+
+<div class="figure">
+<p><img src="nested.png" alt="nested.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5d10e6d" class="outline-3">
+<h3 id="org5d10e6d"><span class="section-number-3">2.3</span> Other cases where nesting is useful</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+<b>Elections</b>
+</p>
+
+<ul class="org-ul">
+<li>Suppose we have two candidates, A and B</li>
+<li>If we introduce C, whose platform resembles B, what will new vote shares be?</li>
+<li>(Primary elections are a kind of nesting)</li>
+</ul>
+
+<p>
+<b>Product markets</b>
+</p>
+<ul class="org-ul">
+<li>Nesting ``branded'' and ``generic'' products (e.g. branded vs. micro-brewed beer)</li>
+<li>But some consumers won't purchase either type of the product</li>
+<li>Ignoring non-buyers, will give misleading price elasticities of demand</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2f96c9a" class="outline-2">
+<h2 id="org2f96c9a"><span class="section-number-2">3</span> Nested Logit</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Coming back to the red bus/blue bus problem, we would like some way for the errors for the red bus to be correlated with the errors for the blue bus
+</p>
+<ul class="org-ul">
+<li>The <b>nested logit</b> allows a nest-specific error:</li>
+</ul>
+
+\begin{align*}
+U_{i,RedBus}&=u_{i,RedBus\phantom{e}}+\nu_{i,Bus}+\lambda\epsilon_{i,RedBus}\\
+U_{i,BlueBus}&=u_{i,BlueBus}+\nu_{i,Bus}+\lambda\epsilon_{i,BlueBus}\\
+U_{i,Car}&=u_{i,Car\phantom{eBus}}+\nu_{i,Car}+\lambda\epsilon_{i,Car}
+\end{align*}
+
+<p>
+where:
+</p>
+
+<ol class="org-ol">
+<li>\(\nu_{ik}+\lambda\epsilon_{ij}\) is distributed Type I Extreme Value</li>
+<li>The \(\nu\)'s and the \(\epsilon\)'s are independent</li>
+<li>\(\epsilon_{ij}\) is distributed Type I extreme value</li>
+<li>Distribution of \(\nu_k\)'s is derived in Theorem 2.1 of <a class='org-ref-reference' href="#cardell1997">cardell1997</a></li>
+</ol>
+
+<p>
+Composite error term for car is independent from either the red bus error or the blue bus error  
+</p>
+
+<ul class="org-ul">
+<li>If we added a yellow bus, all errors in the bus nest would be independent conditional on choosing to take a bus (i.e. <b>IIA within nest</b>)</li>
+<li>But the bus nest errors are correlated from the viewpoint of the top level (i.e. before conditioning on nest choice)</li>
+<li>Note: adding two extreme value errors does .hi[not] give back an extreme value error
+<ul class="org-ul">
+<li>But the difference between two T1EV errors is distributed logistic</li>
+</ul></li>
+</ul>
+
+<p>
+More important than the exact error distribution is the choice probabilities:
+</p>
+\begin{align*}
+P_{iC}&=\frac{\exp(u_{iC})}{\left[\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\frac{u_{iBB}}{\lambda}\right)\right]^{\lambda}+\exp(u_{iC})}\\
+P_{iRB}&=\frac{\exp\left(\frac{u_{iRB}}{\lambda}\right)\left[\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\frac{u_{iBB}}{\lambda}\right)\right]^{\lambda-1}}{\left[\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\frac{u_{iBB}}{\lambda}\right)\right]^{\lambda}+\exp(u_{iC})}
+\end{align*}
+
+
+<p>
+Not particularly intuitive, but can break it down into parts \(P(B)P(RB|B)\):
+</p>
+\begin{align}
+P_{iRB}&=\left(\frac{\left[\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\frac{u_{iBB}}{\lambda}\right)\right]^{\lambda}}{\left[\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\frac{u_{iBB}}{\lambda}\right)\right]^{\lambda}+\exp(u_{iC})}\right)\times\label{eq:pbus}\\
+&\phantom{\times\times}\left(\frac{\exp\left(\frac{u_{iRB}}{\lambda}\right)}{\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\frac{u_{iBB}}{\lambda}\right)}\right)\nonumber
+\end{align}
+</div>
+</div>
+
+<div id="outline-container-orge41b985" class="outline-2">
+<h2 id="orge41b985"><span class="section-number-2">4</span> Nested Logit Estimation</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The log likelihood can then be written as:
+</p>
+\begin{align*}
+\ell&=\sum_{i=1}^N\sum_{j\in J}(d_{ij}=1)\ln(P_{ij})\\
+&= \sum_{i=1}^N\left[(d_{iC}=1)\ln(P_{iC})+\sum_{j\in J_B}(d_{ij}=1)\ln(P_{iB}P_{ij|B})\right]\\
+&=\sum_{i=1}^N\left[(d_{iC}=1)\ln(P_{iC})+\sum_{j\in J_B}(d_{ij}=1)(\ln(P_{iB})+\ln(P_{ij|B}))\right]\\
+&=\sum_{i=1}^N\Bigg[(d_{iC}=1)\ln(P_{iC})+(d_{iBB}=1+d_{iRB}=1)\ln(P_{iB})\\
+&\qquad+\left.\sum_{j\in J_B}(d_{ij}=1)\ln(P_{ij|B})\right]
+\end{align*}
+
+<p>
+Could estimate a nested logit by straight maximum likelihood.  An alternative follows from decomposing the nests into the product of two probabilities: \(P(RB|B)P(B)\)
+</p>
+
+<ul class="org-ul">
+<li>In order to do this, however, first decompose \(u_{RB}\) into two parts:</li>
+</ul>
+\begin{align*}
+u_{iRB}&=u_{iB}+u_{iRB|B}
+\end{align*}
+<ul class="org-ul">
+<li>We also need to choose normalizations:
+
+<ul class="org-ul">
+<li>\(u_{iC} = 0\)</li>
+<li>\(u_{iBB|B} = 0\)</li>
+</ul></li>
+
+<li>So we will estimate \((\beta_{B},\beta_{RB}, \gamma,\lambda)\) where \(\gamma\) corresponds to the \(Z\)'s (alt-specific)</li>
+</ul>
+
+<p>
+Note that our normalizations imply the following observable components of utility
+</p>
+\begin{align*}
+u_{iC}&=0\\
+u_{iBB}&=\beta_{B}X_{i}+\gamma (Z_{BB}-Z_{C})\\
+u_{iRB}&=(\beta_{B}+\beta_{RB})X_{i}+\gamma (Z_{RB}-Z_{C})
+\end{align*}
+
+<ul class="org-ul">
+<li>Now estimate \(\beta_{RB}\) and \(\gamma\) in a 1st stage using only observations that chose bus, \(N_B\):</li>
+</ul>
+\begin{align*}
+\ell_1&=\sum_{i=1}^{N_B}(d_{iRB}=1)(u_{iRB|B}/\lambda)+\ln\left(1+\exp(u_{iRB|B}/\lambda)\right)
+\end{align*}
+
+<ul class="org-ul">
+<li>The \(1\) in the \(\ln()\) operator corresponds to \(\exp(u_{iBB|B}/\lambda)\) since \(u_{iBB|B} = 0\)</li>
+</ul>
+
+
+<p>
+Now consider the term in the numerator of \(P(B)\) in \eqref{eq:pbus}.  We can rewrite this as:
+</p>
+\begin{align*}
+\left[\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\frac{u_{iBB}}{\lambda}\right)\right]^{\lambda}&=
+\exp(u_{iBB})\left[\exp\left(\frac{u_{iRB|B}}{\lambda}\right)+1\right]^{\lambda}\\
+&=\exp(u_{iBB}+\lambda I_{iB})
+\end{align*}
+
+<p>
+where \(I_{iB}\) is called the .hi[inclusive value] and is given by:
+</p>
+\begin{align*}
+I_{iB}&=\ln\left(\exp\left(\frac{u_{iRB|B}}{\lambda}\right)+1\right)
+\end{align*}
+
+<p>
+Note: looks like \(E\left(\text{utility}\right)\) associated with a particular nest (minus Euler's constant)
+</p>
+
+
+<p>
+Taking the estimates of \(u_{iRB|B}\) as given and calculating the inclusive value, we now estimate a second logit to get \(\beta_B\):
+</p>
+\begin{align*}
+\ell_2&=\sum_i(d_{iB}=1)(u_{iBB}+\lambda I_{iB}-u_{iC})+\ln(1+\exp(u_{iBB}+\lambda I_{iB}-u_{iC}))
+\end{align*}
+
+<ul class="org-ul">
+<li>Could do all this because log of the probabilities was additively separable. Consider the log likelihood</li>
+</ul>
+<p>
+contribution of someone who chose red bus:
+</p>
+\begin{align*}
+\ln(P_{iB}(\beta_{B},\beta_{RB},\gamma,\lambda))&+\ln(P_{iRB|B}(\beta_{RB},\gamma))
+\end{align*}
+
+<ul class="org-ul">
+<li>We get estimates of \(\beta_{RB}\) and \(\gamma\) only from the second part of log likelihood</li>
+
+<li>Then we take these as given when estimating \(\beta_{B}\) and \(\lambda\)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org473f75b" class="outline-2">
+<h2 id="org473f75b"><span class="section-number-2">5</span> The Nested Logit as a Dynamic Discrete Choice Model</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Instead of having individuals know their full error, consider the case where the error is revealed in stages
+</p>
+
+<ul class="org-ul">
+<li>First individuals choose whether or not to ride the bus and there is an extreme value error associated with both the bus and the car option</li>
+<li>Individuals take into account that if they choose the bus option they will get to make a choice about which bus in the next period (option value)</li>
+<li>With the errors in the second choice also distributed Type I extreme value, independent from each other, and independent from the errors in the first period, the expectation on the value of the second period decision is \(\lambda I_{iB}\) plus Euler's constant.</li>
+</ul>
+</div>
+
+
+<div id="outline-container-orgd70dc61" class="outline-3">
+<h3 id="orgd70dc61"><span class="section-number-3">5.1</span> Proposition 1 <a class='org-ref-reference' href="#mcfadden1978">mcfadden1978</a></h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Let \(Y_{j}=e^{u_{j}}\). Suppose we have a function \(G(Y_{1},...,Y_{{J}})\) that maps from \(R^{{J}}\) into \(R^1\)
+</p>
+
+<p>
+If \(G\) satisfies:
+</p>
+<ol class="org-ol">
+<li>\(G\geq 0\)</li>
+<li>\(G\) is homogeneous of some degree \(k\)</li>
+<li>\(G\rightarrow \infty\) as \(Y_{j}\rightarrow \infty\) for any \(j\)</li>
+<li>Cross partial derivatives weakly alternate in sign, beginning with \(G_{i}\geq 0\)</li>
+</ol>
+
+
+<p>
+then:
+</p>
+\begin{align*}
+F(u_1,...,u_\mathcal{J})&=\exp\left[-G(Y_1,....,Y_{J})\right]
+\end{align*}
+<p>
+is the cumulative distribution of a multivariate extreme value function and:
+</p>
+
+\begin{align*}
+P_{i}&=\frac{Y_{i}G_{i}}{G}
+\end{align*}
+<p>
+where \(G_i\) denotes the derivative of \(G\) with respect to \(Y_i\)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org73b0138" class="outline-2">
+<h2 id="org73b0138"><span class="section-number-2">6</span> Logit from GEV</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Another way of thinking about the last statement is that:
+</p>
+\begin{align*}
+P_i&=\frac{\partial \ln(G)}{\partial u_i}
+\end{align*}
+
+<ul class="org-ul">
+<li>For the multinomial logit case, the \(G\) function is:</li>
+</ul>
+\begin{align*}
+G&=\sum_{j=1}^{{J}}\exp(u_j)
+\end{align*}
+<p>
+with the derivative of the log of this giving multinomial logit probabilities
+</p>
+
+<ul class="org-ul">
+<li>But \(\ln(G)\) (plus Euler's constant) is .hi[also] expected utility</li>
+
+<li>In fact, for all GEV models \(\ln(G)\) is expected utility!</li>
+</ul>
+
+<p>
+Suppose a nested logit model with two nests \((F,NF)\) and a no-purchase option \(N\)
+</p>
+
+<ul class="org-ul">
+<li>The \(G\) function is then:</li>
+</ul>
+\begin{align*}
+G&=\left(\sum_{j\in F}\exp(u_j/\lambda_F)\right)^{\lambda_F}+\left(\sum_{j\in NF}\exp(u_j/\lambda_{NF})\right)^{\lambda_{NF}}+\exp(u_N)
+\end{align*}
+
+<ul class="org-ul">
+<li>Differentiating \(\ln(G)\) (the expected utility function) with respect to \(u_j\) where \(k\in F\) yields the probability \(k\) is chosen:</li>
+</ul>
+
+\begin{align*}
+P_k&=\frac{\exp(u_k/\lambda_F)\left(\sum_{j\in F}\exp(u_j/\lambda_F)\right)^{\lambda_F-1}}{\left(\sum_{j\in F}\exp(u_j/\lambda_F)\right)^{\lambda_F}+\left(\sum_{j\in NF}\exp(u_j/\lambda_{NF})\right)^{\lambda_{NF}}+\exp(u_N)}
+\end{align*}
+</div>
+
+<div id="outline-container-org684836c" class="outline-3">
+<h3 id="org684836c"><span class="section-number-3">6.1</span> Overlapping nests (Bresnahan et al., 1997)</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+We can also come up with more general nesting structures
+</p>
+
+<ul class="org-ul">
+<li><a class='org-ref-reference' href="#bst1997">bst1997</a> model 4 overlapping nests for computers:</li>
+
+<li>Branded but not Frontier \(\{B,NF\}\)</li>
+<li>Generic but Frontier  \(\{NB,F\}\)</li>
+<li>Branded and Frontier  \(\{B,F\}\)</li>
+<li>Generic but not Frontier  \(\{NB,NF\}\)</li>
+
+<li>Use the model to understand market power in PC sector in late 1980s</li>
+
+<li>Overlapping nests explain coexistence of imitative entry and innovative investment</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org86c7385" class="outline-2">
+<h2 id="org86c7385">References</h2>
+<div class="outline-text-2" id="text-org86c7385">
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: September 10th, 2020</p>
+<p class="author">Author: Gabriel Petrini</p>
+<p class="date">Created: 2020-09-11 sex 11:53</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
