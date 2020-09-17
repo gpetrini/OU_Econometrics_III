@@ -1,7 +1,6 @@
 #+TITLE: GEV
 #+AUTHOR: Gabriel Petrini
 #+DATE: September 10th, 2020
-#+LATEX_HEADER: \bibliography{./References.bib}
 #+LATEX_HEADER: \usepackage[american]{babel}
 #+LATEX_HEADER: \usepackage{minted}
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -278,4 +277,4 @@ We can also come up with more general nesting structures
   :UNNUMBERED: t
   :END:
 
-#+LATEX:\printbibliography
+#+BIBLIOGRAPHY: ./References.bib

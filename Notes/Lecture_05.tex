@@ -1,4 +1,4 @@
-% Created 2020-09-11 sex 11:52
+% Created 2020-09-17 qui 18:18
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,7 +29,6 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 \usepackage{attachfile}
 \usepackage{setspace}
 \usepackage{tikz}
-\bibliography{./References.bib}
 \usepackage[american, english]{babel}
 \usepackage{minted}
 \author{Gabriel Petrini}
@@ -45,10 +44,10 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 \end{minted}
 
 \section{Pre-class reading: \href{http://eml.berkeley.edu/books/choice2nd/Ch04\_p76-96.pdf}{Train (2009, Ch 4.1--4.2)}}
-\label{sec:org3efee05}
+\label{sec:org1985b58}
 
 \subsection{Reading Quiz}
-\label{sec:orgb43ff4e}
+\label{sec:org2fff647}
 \begin{enumerate}
 \item Explain why mixed logit is such a popular model, according to Train. What are its strong points vis-à-vis the IIA problem?
 \item What are the computational drawbacks to mixed logit?
@@ -59,10 +58,10 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 
 \section{Review}
-\label{sec:org1abb5eb}
+\label{sec:orgb6d108f}
 
 \subsection{Red bus / blue bus choice set}
-\label{sec:orgbc05bb7}
+\label{sec:orgb61cfa8}
 
 \begin{itemize}
 \item As we discussed last time, adding another bus results in odd substitution patterns
@@ -75,7 +74,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 
 \subsection{Nesting the choice set}
-\label{sec:org2ce3071}
+\label{sec:orgdb56363}
 One way to get around IIA is to \textbf{nest} the choice set
 \begin{itemize}
 \item Nesting explicitly introduces correlation across alternatives within the same nest
@@ -88,7 +87,7 @@ One way to get around IIA is to \textbf{nest} the choice set
 
 
 \subsection{Other cases where nesting is useful}
-\label{sec:orgca357d3}
+\label{sec:orgab23ed6}
 
 \textbf{Elections}
 
@@ -106,7 +105,7 @@ One way to get around IIA is to \textbf{nest} the choice set
 \end{itemize}
 
 \section{Nested Logit}
-\label{sec:org111c550}
+\label{sec:orgff15ae3}
 
 Coming back to the red bus/blue bus problem, we would like some way for the errors for the red bus to be correlated with the errors for the blue bus
 \begin{itemize}
@@ -153,7 +152,7 @@ P_{iRB}&=\left(\frac{\left[\exp\left(\frac{u_{iRB}}{\lambda}\right)+\exp\left(\f
 \end{align}
 
 \section{Nested Logit Estimation}
-\label{sec:org06bb8d2}
+\label{sec:org61e2e1c}
 
 The log likelihood can then be written as:
 \begin{align*}
@@ -238,7 +237,7 @@ contribution of someone who chose red bus:
 
 
 \section{The Nested Logit as a Dynamic Discrete Choice Model}
-\label{sec:orgd187265}
+\label{sec:org4d4c9fa}
 
 Instead of having individuals know their full error, consider the case where the error is revealed in stages
 
@@ -250,7 +249,7 @@ Instead of having individuals know their full error, consider the case where the
 
 
 \subsection{Proposition 1 \cite{mcfadden1978}}
-\label{sec:org1f39404}
+\label{sec:org4183645}
 Let \(Y_{j}=e^{u_{j}}\). Suppose we have a function \(G(Y_{1},...,Y_{{J}})\) that maps from \(R^{{J}}\) into \(R^1\)
 
 If \(G\) satisfies:
@@ -274,7 +273,7 @@ P_{i}&=\frac{Y_{i}G_{i}}{G}
 where \(G_i\) denotes the derivative of \(G\) with respect to \(Y_i\)
 
 \section{Logit from GEV}
-\label{sec:orgdf323d0}
+\label{sec:org33f13e0}
 
 Another way of thinking about the last statement is that:
 \begin{align*}
@@ -313,7 +312,7 @@ P_k&=\frac{\exp(u_k/\lambda_F)\left(\sum_{j\in F}\exp(u_j/\lambda_F)\right)^{\la
 \end{align*}
 
 \subsection{Overlapping nests (Bresnahan et al., 1997)}
-\label{sec:org77e54ff}
+\label{sec:orgb35c84f}
 
 We can also come up with more general nesting structures
 
@@ -332,6 +331,5 @@ We can also come up with more general nesting structures
 
 
 \section*{References}
-\label{sec:org3abb94f}
-\printbibliography
+\label{sec:org568be15}
 \end{document}

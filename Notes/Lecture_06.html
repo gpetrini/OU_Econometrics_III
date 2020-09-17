@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-15 ter 15:59 -->
+<!-- 2020-09-17 qui 11:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Preference Heterogeneity with Mixture Distributions</title>
@@ -275,42 +275,46 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga0b3dcf">1. Reading Quiz</a></li>
-<li><a href="#org2f922eb">2. Preference Heterogeneity</a>
+<li><a href="#org9cef508">1. Reading Quiz</a></li>
+<li><a href="#org47a7c1c">2. Preference Heterogeneity</a>
 <ul>
-<li><a href="#org78773ac">2.1. Observable preference heterogeneity</a></li>
-<li><a href="#org5b6224a">2.2. Unobservable preference heterogeneity</a></li>
+<li><a href="#orgf6b4227">2.1. Observable preference heterogeneity</a></li>
+<li><a href="#org0d67cd5">2.2. Unobservable preference heterogeneity</a></li>
 </ul>
 </li>
-<li><a href="#orge5c238a">3. Mixed Logit likelihood function</a>
+<li><a href="#orge1e5597">3. Mixed Logit likelihood function</a>
 <ul>
-<li><a href="#org8ccb21a">3.1. Common mixing distributions</a></li>
-<li><a href="#orgdb848fe">3.2. Mixed Logit estimation</a></li>
-<li><a href="#org6cb1a09">3.3. Finite Mixture Distributions</a></li>
-<li><a href="#org82a8b3d">3.4. Mixture Distributions and Panel Data</a></li>
-</ul>
-</li>
-<li><a href="#org9f0c8a6">4. Dynamic Selection</a>
+<li><a href="#orgbff52b6">3.1. Common mixing distributions</a></li>
+<li><a href="#org39fc16c">3.2. Mixed Logit estimation</a></li>
+<li><a href="#org6a2c5c5">3.3. Finite Mixture Distributions</a></li>
+<li><a href="#orge578d97">3.4. Mixture Distributions and Panel Data</a>
 <ul>
-<li><a href="#org70481a3">4.1. Estimation in Stages</a>
-<ul>
-<li><a href="#org0ecf626">4.1.1. Non-separable means no stages</a></li>
-</ul>
-</li>
-<li><a href="#orgfd01d26">4.2. The EM Algorithm</a>
-<ul>
-<li><a href="#org5c3aabb">4.2.1. Estimation in stages again</a></li>
+<li><a href="#org7c5a0e4">3.4.1. Short Review</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc18581f">5. To Recap</a></li>
+<li><a href="#orgde28f65">4. Dynamic Selection</a>
+<ul>
+<li><a href="#orgf24cdf8">4.1. Estimation in Stages</a>
+<ul>
+<li><a href="#orga515a2b">4.1.1. Non-separable means no stages</a></li>
+</ul>
+</li>
+<li><a href="#orgdc23b12">4.2. The EM Algorithm</a>
+<ul>
+<li><a href="#org090e101">4.2.1. Estimation in stages again</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org66a502e">5. To Recap</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga0b3dcf" class="outline-2">
-<h2 id="orga0b3dcf"><span class="section-number-2">1</span> Reading Quiz</h2>
+<div id="outline-container-org9cef508" class="outline-2">
+<h2 id="org9cef508"><span class="section-number-2">1</span> Reading Quiz</h2>
 <div class="outline-text-2" id="text-1">
 <ol class="org-ol">
 <li>Explain why mixed logit is such a popular model, according to Train. What are its strong points vis-à-vis the IIA problem?</li>
@@ -322,8 +326,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org2f922eb" class="outline-2">
-<h2 id="org2f922eb"><span class="section-number-2">2</span> Preference Heterogeneity</h2>
+<div id="outline-container-org47a7c1c" class="outline-2">
+<h2 id="org47a7c1c"><span class="section-number-2">2</span> Preference Heterogeneity</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 So far, we have only looked at models where all agents have <span class="underline">identical preferences</span>
@@ -338,8 +342,8 @@ So far, we have only looked at models where all agents have <span class="underli
 </ul>
 </div>
 
-<div id="outline-container-org78773ac" class="outline-3">
-<h3 id="org78773ac"><span class="section-number-3">2.1</span> Observable preference heterogeneity</h3>
+<div id="outline-container-orgf6b4227" class="outline-3">
+<h3 id="orgf6b4227"><span class="section-number-3">2.1</span> Observable preference heterogeneity</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 One solution to the homogeneity problem is to add interaction terms
@@ -370,8 +374,8 @@ u_{i,car}&=\beta_2 X_i + \widetilde{\gamma} Z_2 X_i
 </div>
 </div>
 
-<div id="outline-container-org5b6224a" class="outline-3">
-<h3 id="org5b6224a"><span class="section-number-3">2.2</span> Unobservable preference heterogeneity</h3>
+<div id="outline-container-org0d67cd5" class="outline-3">
+<h3 id="org0d67cd5"><span class="section-number-3">2.2</span> Unobservable preference heterogeneity</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Many dimensions of preferences are likely unobserved. In this case, we need to ``interact'' \(Z\) with something unobserved
@@ -390,8 +394,8 @@ Many dimensions of preferences are likely unobserved. In this case, we need to `
 </div>
 </div>
 
-<div id="outline-container-orge5c238a" class="outline-2">
-<h2 id="orge5c238a"><span class="section-number-2">3</span> Mixed Logit likelihood function</h2>
+<div id="outline-container-orge1e5597" class="outline-2">
+<h2 id="orge1e5597"><span class="section-number-2">3</span> Mixed Logit likelihood function</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Assume, e.g. \(\gamma_i \sim F\) with pdf \(f\) and distributional parameters \(\mu\) and \(\sigma\)
@@ -412,8 +416,8 @@ P_{ij}\left(X,Z;\beta,\gamma\right)&= \int\frac{\exp\left(X_{i}\left(\beta_{j}-\
 \end{align*}
 </div>
 
-<div id="outline-container-org8ccb21a" class="outline-3">
-<h3 id="org8ccb21a"><span class="section-number-3">3.1</span> Common mixing distributions</h3>
+<div id="outline-container-orgbff52b6" class="outline-3">
+<h3 id="orgbff52b6"><span class="section-number-3">3.1</span> Common mixing distributions</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Normal</li>
@@ -428,8 +432,8 @@ P_{ij}\left(X,Z;\beta,\gamma\right)&= \int\frac{\exp\left(X_{i}\left(\beta_{j}-\
 </div>
 </div>
 
-<div id="outline-container-orgdb848fe" class="outline-3">
-<h3 id="orgdb848fe"><span class="section-number-3">3.2</span> Mixed Logit estimation</h3>
+<div id="outline-container-org39fc16c" class="outline-3">
+<h3 id="org39fc16c"><span class="section-number-3">3.2</span> Mixed Logit estimation</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 With the integral inside the log, estimation of the mixed logit is intensive. To estimate the likelihood function, need to numerically approximate the integral
@@ -443,8 +447,8 @@ With the integral inside the log, estimation of the mixed logit is intensive. To
 </div>
 
 
-<div id="outline-container-org6cb1a09" class="outline-3">
-<h3 id="org6cb1a09"><span class="section-number-3">3.3</span> Finite Mixture Distributions</h3>
+<div id="outline-container-org6a2c5c5" class="outline-3">
+<h3 id="org6a2c5c5"><span class="section-number-3">3.3</span> Finite Mixture Distributions</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Another option to mixed logit is to assume the mixing distribution is <span class="underline">discrete</span>. We assume we have missing variable that has finite support and is independent from the other variables 
@@ -464,8 +468,8 @@ Another option to mixed logit is to assume the mixing distribution is <span clas
 </div>
 </div>
 
-<div id="outline-container-org82a8b3d" class="outline-3">
-<h3 id="org82a8b3d"><span class="section-number-3">3.4</span> Mixture Distributions and Panel Data</h3>
+<div id="outline-container-orge578d97" class="outline-3">
+<h3 id="orge578d97"><span class="section-number-3">3.4</span> Mixture Distributions and Panel Data</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 With panel data, mixture dist. allows for <b>permanent unobserved heterogeneity</b>
@@ -486,11 +490,31 @@ With panel data, mixture dist. allows for <b>permanent unobserved heterogeneity<
 \ell\left(X,Z;\beta,\gamma,\mu,\sigma\right)=&\sum_{i=1}^N \log\left\{\int\prod_{t}\prod_{j}\left[\frac{\exp\left(X_{it}\left(\beta_{j}-\beta_{J}\right)+\gamma\left(Z_{ijt}-Z_{iJt}\right)\right)}{\sum_k \exp\left(X_{it}\left(\beta_{k}-\beta_{J}\right)+\gamma\left(Z_{ikt}-Z_{iJt}\right)\right)}\right]^{d_{ijt}}f\left(\gamma;\mu,\sigma\right)d\gamma\right\}\\
 \end{align*}
 </div>
+
+<div id="outline-container-org7c5a0e4" class="outline-4">
+<h4 id="org7c5a0e4"><span class="section-number-4">3.4.1</span> Short Review</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+Linear Model
+</p>
+
+<p>
+\[
+y_{it} = x_{it}\cdot \beta  + \underbrace{a_{it} + \epsilon_{it}}_{\text{Composite error} (v_{it})}
+\]
+</p>
+
+<ul class="org-ul">
+<li><b>Fixed effects:</b> \(\hat \beta\) is robust to related \(X\) and  \(a_{it}\)</li>
+<li><b>Random effects:</b> \(\hat \beta\) is efficient, but \(X\) must be independent to \(a_{it}\), otherwise inconsistent</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 
-<div id="outline-container-org9f0c8a6" class="outline-2">
-<h2 id="org9f0c8a6"><span class="section-number-2">4</span> Dynamic Selection</h2>
+<div id="outline-container-orgde28f65" class="outline-2">
+<h2 id="orgde28f65"><span class="section-number-2">4</span> Dynamic Selection</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Often, we want to link the choices to other outcomes:
@@ -525,8 +549,8 @@ where \(s\) is the unobserved type
 </p>
 </div>
 
-<div id="outline-container-org70481a3" class="outline-3">
-<h3 id="org70481a3"><span class="section-number-3">4.1</span> Estimation in Stages</h3>
+<div id="outline-container-orgf24cdf8" class="outline-3">
+<h3 id="orgf24cdf8"><span class="section-number-3">4.1</span> Estimation in Stages</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Suppose \(s\) was observed. There'd be no selection problem as long as we could condition on \(s\) and \(X_{1t}\). The log likelihood function is:
@@ -545,8 +569,8 @@ Estimation could proceed in stages:
 </ol>
 </div>
 
-<div id="outline-container-org0ecf626" class="outline-4">
-<h4 id="org0ecf626"><span class="section-number-4">4.1.1</span> Non-separable means no stages</h4>
+<div id="outline-container-orga515a2b" class="outline-4">
+<h4 id="orga515a2b"><span class="section-number-4">4.1.1</span> Non-separable means no stages</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 When \(s\) is unobserved, however, the log likelihood function is not additively separable:
@@ -565,8 +589,8 @@ where \(\mathcal{L}\) is a likelihood function
 </div>
 </div>
 
-<div id="outline-container-orgfd01d26" class="outline-3">
-<h3 id="orgfd01d26"><span class="section-number-3">4.2</span> The EM Algorithm</h3>
+<div id="outline-container-orgdc23b12" class="outline-3">
+<h3 id="orgdc23b12"><span class="section-number-3">4.2</span> The EM Algorithm</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 We can get additive separability of the finite mixture model with the <b>EM algorithm</b> (``Expectation-Maximization''). The algorithm iterates on two steps:
@@ -604,8 +628,8 @@ where \(q_{is}\) is the probability that \(i\) belongs to group \(s\)
 </ul>
 </div>
 
-<div id="outline-container-org5c3aabb" class="outline-4">
-<h4 id="org5c3aabb"><span class="section-number-4">4.2.1</span> Estimation in stages again</h4>
+<div id="outline-container-org090e101" class="outline-4">
+<h4 id="org090e101"><span class="section-number-4">4.2.1</span> Estimation in stages again</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 We can now estimate the model in stages because of the restoration of separability. The only twist is that we need to <b>weight</b> by the \(q\)'s in each estimation stage
@@ -627,8 +651,8 @@ q_{is}=&\frac{\pi_s\prod_t\mathcal{L}(Y_{1t}|X_{1t},\alpha_1,s)\mathcal{L}(Y_{2t
 </div>
 </div>
 
-<div id="outline-container-orgc18581f" class="outline-2">
-<h2 id="orgc18581f"><span class="section-number-2">5</span> To Recap</h2>
+<div id="outline-container-org66a502e" class="outline-2">
+<h2 id="org66a502e"><span class="section-number-2">5</span> To Recap</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Why are we doing all of this difficult work?
@@ -645,7 +669,7 @@ Why are we doing all of this difficult work?
 <div id="postamble" class="status">
 <p class="date">Date: date</p>
 <p class="author">Author: Gabriel Petrini</p>
-<p class="date">Created: 2020-09-15 ter 15:59</p>
+<p class="date">Created: 2020-09-17 qui 11:33</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
