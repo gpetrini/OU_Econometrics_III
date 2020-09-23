@@ -13,7 +13,7 @@
 
 Directions: Answer all questions. Each student must turn in their own copy, but you may work in groups. Clearly label all answers. Show all of your code. Turn in jl-file(s), output files and writeup via GitHub. Your writeup may simply consist of comments in jl-file(s). If applicable, put the names of all group members at the top of your writeup or jl-file.
 
-#+BEGIN_SRC julia
+#+BEGIN_SRC julia :session teste
 using Random, Distributions, FreqTables, Statistics
 using LinearAlgebra
 using JLD2, CSV, DataFrames
