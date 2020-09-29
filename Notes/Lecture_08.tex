@@ -1,0 +1,89 @@
+% Created 2020-09-29 ter 18:34
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[theorems, skins]{tcolorbox}
+\usepackage[style=abnt,noslsn,extrayear,uniquename=init,giveninits,justify,sccite,
+scbib,repeattitles,doi=false,isbn=false,url=false,maxcitenames=2,
+natbib=true,backend=biber]{biblatex}
+\usepackage{url}
+\usepackage[cache=false]{minted}
+\usepackage[linktocpage,pdfstartview=FitH,colorlinks,
+linkcolor=blue,anchorcolor=blue,
+citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
+\usepackage{attachfile}
+\usepackage{setspace}
+\usepackage{tikz}
+\author{Gabriel Petrini}
+\date{October 1st, 2020}
+\title{Estimating Dynamic Models Without Solving Value Functions}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\bibliography{References}
+
+
+\section*{\cite{hotzMiller1993}}
+\label{sec:org9c92db5}
+
+Dynamic discrete choice models are complicated to estimate because of the future value terms. \citet{hotzMiller1993} show:
+
+\begin{itemize}
+\item Differences in conditional value functions \(v_j-v_{j'}\) can be mapped into \uline{conditional choice probabilities} ( \(p_j\)'s )
+\item We can pull the \(p_j\)'s from the data in a first stage
+\item \textbf{Empirical example:} optimal stopping with respect to couples' fertility
+\end{itemize}
+
+\subsection*{Difference in \(v\)'s and logit errors}
+\label{sec:orgc62eac5}
+
+Consider an individual who faces two choices where the errors are T1EV. The probability of choice 1 is:
+\begin{align*}
+p_1&=\frac{\exp(v_1)}{\exp(v_0)+\exp(v_1)}
+\end{align*}
+
+The ratio of \(p_1/p_0\) is then:
+\begin{align*}
+\frac{p_1}{p_0}&=\frac{\exp(v_1)}{\exp(v_0)} = \exp(v_1 - v_0)
+\end{align*}
+implying that:
+\begin{align*}
+\ln(p_1/p_0)&=v_1-v_0
+\end{align*}
+
+\subsection*{General structure}
+\label{sec:org916f1e4}
+
+The inversion theorem of Hotz and Miller says that there exists a mapping, \(\psi\), from the conditional choice probabilities, the \(p\)'s, into the differences in the conditional valuation functions, \(v_j-v_k\):
+\begin{align*}
+V_{t+1}&=v_{0t+1}+\mathbb{E}\max\{\epsilon_{0t+1},v_{1t+1}+\epsilon_{1t+1}-v_{0t+1},...,\\
+&\phantom{\text{----}}v_{{J}t+1}+\epsilon_{{J}t+1}-v_{0t+1}\}\\
+V_{t+1}&=v_{0t+1}+\mathbb{E}\max\{\epsilon_{0t+1},\psi_0^1(p_{t+1})+\epsilon_{1t+1},...,\psi_0^{{J}}(p_{t+1})+\epsilon_{{J}t+1}\}
+\end{align*}
+
+The \(p\)'s can be taken from the data.  However:
+
+\begin{enumerate}
+\item We need the mapping, \(\psi\),
+\item We need to be able to calculate the expectations of the \(\epsilon\)'s
+\item We need to do something with the \(v_0\)'s
+\end{enumerate}
+\end{document}
