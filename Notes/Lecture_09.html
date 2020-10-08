@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-10-07 qua 18:03 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulated Method of Moments: Another Method of Structural Estimation</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Gabriel Petrini" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Simulated Method of Moments: Another Method of Structural Estimation</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4f7c4e2">Generalized Method of Moments (GMM)</a>
+<ul>
+<li><a href="#orgef9096a">Method of Moments</a>
+<ul>
+<li><a href="#org9c77826">OLS Population Moment Conditions</a></li>
+</ul>
+</li>
+<li><a href="#org056774f">GMM with more moment conditions than parameters</a>
+<ul>
+<li><a href="#org16fa056">GMM examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6dd4688">Usefulness of simulation</a>
+<ul>
+<li><a href="#orgad0fe01">Simulated Method of Moments</a>
+<ul>
+<li><a href="#org608a595">Pros of SMM</a></li>
+<li><a href="#orga0c1897">Cons of SMM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org037b64c">SMM in Julia</a>
+<ul>
+<li><a href="#orge17c44f">Estimation steps</a></li>
+</ul>
+</li>
+<li><a href="#org3386b61">SMM optimization</a>
+<ul>
+<li><a href="#orgfaf096c">SMM.jl</a></li>
+</ul>
+</li>
+<li><a href="#orgc637aa1">Indirect inference (NO_ITEM_DATA:smithPalgrave2008)</a>
+<ul>
+<li><a href="#orga6532ab">Example: Economic Model</a>
+<ul>
+<li><a href="#org700ac72">Example: Auxiliary model</a></li>
+<li><a href="#org562c23a">Example: Finding the mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgce59c8a">References</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4f7c4e2" class="outline-2">
+<h2 id="org4f7c4e2">Generalized Method of Moments (GMM)</h2>
+<div class="outline-text-2" id="text-org4f7c4e2">
+<p>
+GMM is a fundamental concept taught in graduate-level econometrics. It is very popular because it nests many common econometric estimators:
+</p>
+<ul class="org-ul">
+<li>OLS</li>
+<li>IV and 2SLS</li>
+<li>Nonlinear least squares (NLLS)</li>
+<li>MLE (e.g. probit, logit)</li>
+</ul>
+
+<p>
+There is a great overview video <a href="https://www.youtube.com/watch?v=U7Ylm187hYA">here</a>.
+</p>
+</div>
+
+<div id="outline-container-orgef9096a" class="outline-3">
+<h3 id="orgef9096a">Method of Moments</h3>
+<div class="outline-text-3" id="text-orgef9096a">
+<p>
+We can use method of moments to estimate a model's parameters
+</p>
+
+<ul class="org-ul">
+<li>Consider a simple regression model</li>
+</ul>
+
+\begin{align*}
+y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon
+\end{align*}
+
+<p>
+Assume \(\mathbb{E}[\varepsilon \vert \mathbb{x}] = 0\) (conditional independence). Then we can form a system of 3 equations and 3 unknowns
+</p>
+</div>
+
+
+<div id="outline-container-org9c77826" class="outline-4">
+<h4 id="org9c77826">OLS Population Moment Conditions</h4>
+<div class="outline-text-4" id="text-org9c77826">
+<p>
+If we write out the OLS moment conditions, we get
+</p>
+
+\begin{align*}
+\mathbb{E}[\varepsilon]     &= 0\\
+\mathbb{E}[\varepsilon' x_1] &= 0\\
+\mathbb{E}[\varepsilon' x_2] &= 0\\
+\end{align*}
+
+<p>
+Rewriting in terms of our parameters of interest \((\beta_0,\beta_1,\beta_2)\):
+</p>
+
+\begin{align*}
+\mathbb{E}[(y - \beta_0 - \beta_1 x_1 - \beta_2 x_2)]     &= 0\\
+\mathbb{E}[(y - \beta_0 - \beta_1 x_1 - \beta_2 x_2)' x_1] &= 0\\
+\mathbb{E}[(y - \beta_0 - \beta_1 x_1 - \beta_2 x_2)' x_2] &= 0\\
+\end{align*}
+</div>
+
+<ul class="org-ul">
+<li><a id="org1fc9513"></a>OLS Sample Moment Conditions<br />
+<div class="outline-text-5" id="text-org1fc9513">
+<p>
+We then need to adjust the previous formula to work with sample analogs:
+</p>
+\begin{align*}
+g\left(\boldsymbol \beta\right) &=\begin{cases}
+\frac{1}{N}\sum_{i=1}^N(y_i - \beta_0 - \beta_1 x_{i1} - \beta_2 x_{i2})         &= 0\\
+\frac{1}{N}\sum_{i=1}^N(y_i - \beta_0 - \beta_1 x_{i1} - \beta_2 x_{i2})' x_{i1} &= 0\\
+\frac{1}{N}\sum_{i=1}^N(y_i - \beta_0 - \beta_1 x_{i1} - \beta_2 x_{i2})' x_{i2} &= 0\end{cases}
+\end{align*}
+
+<p>
+We can estimate this by exactly-identified GMM using the objective function
+</p>
+
+\begin{align*}
+\hat{\boldsymbol \beta} &= \arg \min_{\boldsymbol \beta} J\left(\boldsymbol \beta\right)
+\end{align*}
+<p>
+where
+</p>
+\begin{align*}
+J\left(\boldsymbol \beta\right) &= N g\left(\boldsymbol \beta\right)' g\left(\boldsymbol \beta\right)
+\end{align*}
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org056774f" class="outline-3">
+<h3 id="org056774f">GMM with more moment conditions than parameters</h3>
+<div class="outline-text-3" id="text-org056774f">
+<p>
+The solution to the obj fn on the pvs slide has a closed form for OLS: \((X'X)^{-1}X'y\)
+</p>
+
+<ul class="org-ul">
+<li>In cases with more moment conditions than parameters, we need to weight</li>
+</ul>
+\begin{align*}
+\hat{\boldsymbol \beta} &= \arg \min_{\boldsymbol \beta} J\left(\boldsymbol \beta, \hat{\mathbf{W}}\right)
+\end{align*}
+<p>
+where
+</p>
+\begin{align*}
+J\left(\boldsymbol \beta\right) &= N g\left(\boldsymbol \beta\right)' \hat{\mathbf{W}}(\boldsymbol \beta) g\left(\boldsymbol \beta\right)
+\end{align*}
+
+<ul class="org-ul">
+<li>There is a ton of econometric theory about the optimal weighting matrix \(\hat{\mathbf{W}}\)</li>
+
+<li>As well as the asymptotic properties of the GMM estimator (spoiler: they're good)</li>
+</ul>
+</div>
+
+<div id="outline-container-org16fa056" class="outline-4">
+<h4 id="org16fa056">GMM examples</h4>
+<div class="outline-text-4" id="text-org16fa056">
+<p>
+The most common example of an overidentified GMM is Two Stage Least Squares
+</p>
+
+<ul class="org-ul">
+<li>Specifically, when # instruments \(>\) # endogenous \(x\)'s</li>
+</ul>
+
+<p>
+There are other examples in time series econometrics applications
+</p>
+
+<ul class="org-ul">
+<li>e.g. the \(MA(1)\) model, the stochastic volatility model</li>
+</ul>
+
+<p>
+Or in applications of non-linear least squares or MLE
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a id="org587babf"></a>Binary Logit Sample Moment Conditions<br />
+<div class="outline-text-5" id="text-org587babf">
+<p>
+The moment conditions for the binary logit model are:
+</p>
+\begin{align*}
+g\left(\boldsymbol \beta\right) &=\begin{cases}
+\frac{1}{N}\sum_{i=1}^N\left[y_i - \frac{\exp\left(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\right)}{1+\exp\left(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\right)}\right]         &= 0\\
+\frac{1}{N}\sum_{i=1}^N\left[y_i - \frac{\exp\left(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\right)}{1+\exp\left(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\right)}\right]' x_{i1} &= 0\\
+\frac{1}{N}\sum_{i=1}^N\left[y_i - \frac{\exp\left(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\right)}{1+\exp\left(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\right)}\right]' x_{i2} &= 0\end{cases}
+\end{align*}
+<p>
+where \(y_i \in \left\{0,1\right\}\) 
+</p>
+
+<ul class="org-ul">
+<li>If we have more than two \(X\)'s then we simply add more conditions</li>
+
+<li>The formula for \(J\) is the same as in the OLS case (or any other case)</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="org18ff8b6"></a>Coding example: Estimating binary logit by GMM<br />
+<div class="outline-text-6" id="text-org18ff8b6">
+<p>
+We can estimate the binary logit model by (exactly identified) GMM as follows:
+</p>
+
+<pre class="example">
+    function logit_gmm(α, X, y)
+        K = size(X,2)
+        N = size(y,1)
+        P = exp.(X*α)./(1 .+ exp.(X*α))
+        
+        g = zeros(K)
+        for k = 1:K
+            g[k] = (1/N)*sum( (y .- P) .* X[:,k] )
+        end
+        J = N*g⋅g
+        return J
+    end
+    α_hat_optim = optimize(a -&gt; logit_gmm(a, X, y), rand(size(X,2)), LBFGS(), Optim.Options(g_tol=1e-8, iterations=100_000))
+</pre>
+
+<p>
+This gives estimates that are quite close to (but not identical to) MLE
+</p>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6dd4688" class="outline-2">
+<h2 id="org6dd4688">Usefulness of simulation</h2>
+<div class="outline-text-2" id="text-org6dd4688">
+<p>
+As we showed in PS4, we can sometimes use simulation to compute integrals. Another alternative is to use quadrature to compute the integral
+</p>
+
+<ul class="org-ul">
+<li>In the simulation case, we took draws from the mixture distribution of a mixed logit</li>
+
+<li>More generally, we can estimate highly complex models using simulation methods</li>
+
+<li>In some cases, simulation is the <span class="underline">only</span> option; everything else is intractable
+<ul class="org-ul">
+<li>Quadrature typically only works with very low-dimensional integrals</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-orgad0fe01" class="outline-3">
+<h3 id="orgad0fe01">Simulated Method of Moments</h3>
+<div class="outline-text-3" id="text-orgad0fe01">
+<p>
+As the name would imply, SMM is a simulated version of GMM
+</p>
+
+<ul class="org-ul">
+<li><b>The difference:</b> SMM uses moments from simulated data</li>
+
+<li>The objective is then to make simulated and actual data match</li>
+
+<li>See (NO_ITEM_DATA:mcfadden1989)` and (NO_ITEM_DATA:evans2018) for more details</li>
+
+<li>(NO_ITEM_DATA:evans2018) includes a Python coding example</li>
+
+<li>Notes by <a href="https://www.jasondebacker.com/classes/Lecture10_Notes_SMM.pdf">Jason DeBacker</a>, <a href="https://www3.nd.edu/~esims1/advanced_topics.pdf">Eric Sims</a> and <a href="http://cameron.econ.ucdavis.edu/mmabook/transparencies/ct06_gmm.pdf">Colin Cameron</a> are also helpful</li>
+</ul>
+</div>
+
+<div id="outline-container-org608a595" class="outline-4">
+<h4 id="org608a595">Pros of SMM</h4>
+<div class="outline-text-4" id="text-org608a595">
+<ul class="org-ul">
+<li>Can estimate models with \(P\)'s that don't have a closed form, like probit (NO_ITEM_DATA:chintagunta1992)</li>
+
+<li>Can estimate other models that would otherwise be intractable
+<ul class="org-ul">
+<li>e.g. dynamic models with high-dimensional integrals</li>
+</ul></li>
+
+<li>Or micro-models based only on aggregated data</li>
+
+<li>Coding for simulating the model is already done! Can dive right into counterfactuals</li>
+
+<li>It's straightforward to interpret the moments and know that model is fitting these</li>
+
+<li>Also easier to compare with reduced-form evidence</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga0c1897" class="outline-4">
+<h4 id="orga0c1897">Cons of SMM</h4>
+<div class="outline-text-4" id="text-orga0c1897">
+<ul class="org-ul">
+<li>Much more computationally intensive than GMM</li>
+
+<li>Loss of (statistical) efficiency, relative to MLE (i.e. larger SE's)</li>
+
+<li>For me personally, it's not always clear which moments to select</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org037b64c" class="outline-2">
+<h2 id="org037b64c">SMM in Julia</h2>
+<div class="outline-text-2" id="text-org037b64c">
+<p>
+Once we know the objective fn, we can program any estimator we please
+</p>
+
+<ul class="org-ul">
+<li>Let's consider how to estimate a simple linear regression model</li>
+</ul>
+
+\begin{align*}
+y &= X\beta + \varepsilon\\
+\varepsilon&\sim N(0,\sigma^2)
+\end{align*}
+
+<p>
+\(y\) and \(X\) are data, and we want to estimate \(\beta\) and \(\sigma\)
+</p>
+</div>
+
+<div id="outline-container-orge17c44f" class="outline-3">
+<h3 id="orge17c44f">Estimation steps</h3>
+<div class="outline-text-3" id="text-orge17c44f">
+<p>
+For each guess of \(\theta = [\beta', \sigma]'\) we do the following:
+</p>
+
+<ul class="org-ul">
+<li>Compute data moments</li>
+
+<li>Draw \(N\) \(\varepsilon\)'s</li>
+
+<li>Compute \(y\) from the model equation (call it \(\tilde{y}\)) given values for \(\beta\) and \(\sigma\)</li>
+
+<li>Compute model moments using \(\tilde{y}\) (same as data moments with \(y\))</li>
+
+<li>Update objective function value given values of data and model moments</li>
+</ul>
+
+<pre class="example">
+
+
+function ols_smm(θ, X, y, D)
+    K = size(X,2)
+    N = size(y,1)
+    β = θ[1:end-1]
+    σ = θ[end]
+    if length(β)==1
+        β = β[1]
+    end
+    gmodel = zeros(K+1,D)
+    gdata  = zeros(K+1)
+    # data moments
+    gdata[1] = mean(y)
+    for k = 2:K
+        gdata[k] = cov( y,X[:,k] ) # covariance between y and each of the X's
+    end
+    gdata[K+1] = var(y)            # variance of y
+    #### !!!!!!!!!!!!!!!!!!!!!!!!!!!!! ####
+    # This is critical!                   #
+    Random.seed!(1234)                    #
+    # You must always use the same ε draw #
+    # for every guess of θ!               #
+    #### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ###
+    
+    # simulated model moments
+    for d=1:D
+        ε = sqrt(σ^2)*randn(N) # to ensure σ is always positive
+        ỹ = X*β .+ ε
+        gmodel[1,d] = mean(ỹ)
+        for k=1:K
+            gmodel[k,d] = cov( ỹ,X[:,k] )
+        end
+        gmodel[K+1,d] = var(ỹ)
+    end
+    # minimize squared difference between data and moments
+    g = mean(gmodel .- gdata; dims=2)
+    J = N*g⋅g
+    return J
+end
+</pre>
+
+<ul class="org-ul">
+<li>Data moments to match: \(\left\{\overline{y},\widehat{V}(y),\widehat{Cov}\left(y,X_k\right)\right\}\)</li>
+
+<li>Model moments to match: \(\left\{\overline{\tilde{y}},\widehat{V}(\tilde{y}),\widehat{Cov}\left(\tilde{y},X_k\right)\right\}\)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3386b61" class="outline-2">
+<h2 id="org3386b61">SMM optimization</h2>
+<div class="outline-text-2" id="text-org3386b61">
+<ul class="org-ul">
+<li>We can optimize the objective function with any optimizer we'd like</li>
+
+<li>Note that the SMM objective function is much .hi[bumpier] than its GMM version</li>
+
+<li>So you will need to employ tactics to find the global maximum:
+<ul class="org-ul">
+<li>use LBFGS from many different starting values</li>
+<li>use Simulated Annealing or Particle Swarm</li>
+<li>(these are algorithms designed to find global optima)</li>
+</ul></li>
+
+<li>But if you give it OLS as starting values, it will go to the right place</li>
+
+<li>It will also work if you give it \(Cov(y,X_k)\) as starting values for the slope coefficients</li>
+
+<li>Purely random starting values won't work!</li>
+</ul>
+</div>
+
+<div id="outline-container-orgfaf096c" class="outline-3">
+<h3 id="orgfaf096c">SMM.jl</h3>
+<div class="outline-text-3" id="text-orgfaf096c">
+<ul class="org-ul">
+<li>SMM is so common, that others have already implemented it
+<ul class="org-ul">
+<li>And probably in a more computationally efficient manner!</li>
+</ul></li>
+
+<li>One such package is `SMM.jl`, written by <a href="https://floswald.github.io/">Florian Oswald</a> (Sciences Po)
+<ul class="org-ul">
+<li>This package allows for parallelization, which can speed up estimation time</li>
+
+<li>It also uses a Bayesian Markov Chain Monte Carlo algorithm known as BGP</li>
+
+<li>"BGP" comes from (NO_ITEM_DATA:bgp2013)</li>
+
+<li>I am still learning this package but there are some examples</li>
+</ul></li>
+
+<li>Let's estimate the following model using `SMM.jl`</li>
+</ul>
+
+\begin{align*}
+Y_1 &= \beta_{01} + \varepsilon_{1}\\
+Y_2 &= \beta_{02} + \varepsilon_{2}
+\end{align*}
+<p>
+where \(\mathbf{\varepsilon} \sim MVN\left(\mathbf{0},I\right)\). Thus, the \(\beta\)'s constitute the means of each MVN dimension.
+</p>
+
+<ul class="org-ul">
+<li>The code to do this is included in the examples of `SMM.jl` with \((\beta_{01},\beta_{02}) = (-1,1)\)</li>
+</ul>
+
+<pre class="example">
+
+using SMM, DataFrames
+MA = SMM.parallelNormal() # Note: this line may take up to 5 minutes to execute
+dc = SMM.history(MA.chains[1])
+dc = dc[dc[:accepted].==true, :]
+println(describe(dc))
+</pre>
+
+
+<p>
+You can then verify that the `mean` column for `p1` and `p2` is close to -1 and 1.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc637aa1" class="outline-2">
+<h2 id="orgc637aa1">Indirect inference (NO_ITEM_DATA:smithPalgrave2008)</h2>
+<div class="outline-text-2" id="text-orgc637aa1">
+<p>
+So far today we've only talked about matching model moments to data
+</p>
+
+<ul class="org-ul">
+<li>Logic: if the model matches the data, then it is a reasonable model</li>
+
+<li>Another alternative is known as .hi[indirect inference]</li>
+
+<li>In this case, we use an <b>auxiliary model</b></li>
+</ul>
+
+<p>
+The auxiliary model doesn't need to accurately describe the DGP
+</p>
+
+<ul class="org-ul">
+<li>It simply acts a lens through which to view the world</li>
+
+<li><b>Objective:</b> minimize the parameters of the economic model such that</li>
+
+<li>real-world data = simulated data <b>through the lens of the auxiliary model</b></li>
+</ul>
+</div>
+
+<div id="outline-container-orga6532ab" class="outline-3">
+<h3 id="orga6532ab">Example: Economic Model</h3>
+<div class="outline-text-3" id="text-orga6532ab">
+<p>
+Consider a simple macro model with two simultaneous equations:
+</p>
+
+\begin{align*}
+C_t &= \beta Y_t + u_t\\
+Y_t &= C_t + X_t
+\end{align*}
+
+<ul class="org-ul">
+<li>\(C_t\) (consumption) and \(Y_t\) (income) are endogenous</li>
+
+<li>\(X_t\) (non-consumption expenditure) is exogenous</li>
+
+<li>\(u_t \overset{iid}{\sim}N(0,\sigma^2)\)</li>
+
+<li>Supposing we know the value of \(\sigma^2\), then \(\beta\) is the lone parameter in the model</li>
+</ul>
+</div>
+
+<div id="outline-container-org700ac72" class="outline-4">
+<h4 id="org700ac72">Example: Auxiliary model</h4>
+<div class="outline-text-4" id="text-org700ac72">
+<p>
+We don't need to use indirect inference to estimate \(\beta\), but we can
+</p>
+
+<ul class="org-ul">
+<li>Suppose our auxiliary model is</li>
+</ul>
+
+\begin{align*}
+C_t &= \theta X_t + e_t\\
+e_t &\sim N(0,s^2)
+\end{align*}
+<p>
+where again the variance \(s^2\) is known
+</p>
+
+<ul class="org-ul">
+<li>We can estimate \(\theta\) by OLS or MLE</li>
+
+<li>But how does that help us estimate \(\beta\)?</li>
+
+<li>We need to find the mapping between \(\beta\) and \(\theta\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org562c23a" class="outline-4">
+<h4 id="org562c23a">Example: Finding the mapping</h4>
+<div class="outline-text-4" id="text-org562c23a">
+<p>
+Let's apply some algebra to the first system of equations. Substituting \(Y_t\) gives
+</p>
+
+\begin{align*}
+C_t &= \beta(C_t+X_t)+u_t\\
+C_t &= \frac{\beta}{1-\beta}X_t + \frac{1}{1-\beta}u_t \\
+&\Rightarrow \theta = \frac{\beta}{1-\beta} \\
+&\Rightarrow \beta = \frac{\theta}{1+\theta}
+\end{align*}
+
+<ul class="org-ul">
+<li>We know we can easily estimate \(\theta\) by OLS</li>
+
+<li>Then we can recover \(\hat{\beta}\) by evaluating \(\frac{\hat{\theta}}{1+\hat{\theta}}\)</li>
+
+<li>We worked backwards from the auxiliary model to get estimates of the main model</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgce59c8a" class="outline-2">
+<h2 id="orgce59c8a">References</h2>
+<div class="outline-text-2" id="text-orgce59c8a">
+<style>.csl-entry{text-indent: -1.5em; margin-left: 1.5em;}</style><h2 class='citeproc-org-bib-h2'>Bibliography</h2>
+<div class="csl-bib-body">
+  <div class="csl-entry">NO_ITEM_DATA:mcfadden1989</div>
+  <div class="csl-entry">NO_ITEM_DATA:evans2018</div>
+  <div class="csl-entry">NO_ITEM_DATA:chintagunta1992</div>
+  <div class="csl-entry">NO_ITEM_DATA:bgp2013</div>
+  <div class="csl-entry">NO_ITEM_DATA:smithPalgrave2008</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: October 8th, 2020</p>
+<p class="author">Author: Gabriel Petrini</p>
+<p class="date">Created: 2020-10-07 qua 18:03</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
